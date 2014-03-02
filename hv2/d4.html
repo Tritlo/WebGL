@@ -1,0 +1,36 @@
+
+<html>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute vec4 vPosition;
+
+void
+main()
+{
+    gl_Position = vPosition;
+    gl_PointSize = 1.0;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+void
+main()
+{
+    gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/Angel.js"></script>
+<script type="text/javascript" src="d4.js"></script>
+
+<body>
+<canvas id="gl-canvas" width="512" height="512" style="border: 1px solid black;">
+  <p> Your browser does not seem to support WebGL. This is how it should look like: </p>
+  <img src="d4.png" alt="WebGL Render" />
+</canvas>
+</body>
+</html>

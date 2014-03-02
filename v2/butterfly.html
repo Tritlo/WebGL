@@ -1,0 +1,62 @@
+<html>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+varying vec4 fColor;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat4 objectMatrix;
+
+void main() 
+{
+    fColor = vColor;
+    gl_Position = projectionMatrix*modelViewMatrix*objectMatrix*vPosition;
+    //gl_Position = modelViewMatrix*vPosition;
+} 
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+   
+varying vec4 fColor;
+
+void
+main()
+{
+    gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="util.js"></script>
+<script type="text/javascript" src="Cube.js"></script>
+<script type="text/javascript" src="Butterfly.js"></script>
+<script type="text/javascript" src="butterflies.js"></script>
+<style>
+  #gl-canvas {
+  border: 1px solid lime;
+  }
+  p {
+   font-family: terminus, monospace;
+   font-size: 25px;
+   float:left;
+  }
+  
+</style>
+
+<body style="background: black; color: lime">
+<div id="container">
+<canvas id="gl-canvas" width="800" height="512" style="" oncontextmenu="return false;">
+  <p> Your browser does not seem to support WebGL. This is how it should look like: </p>
+  <!--<img src="solarSystem.png" alt="WebGL Render" />-->
+</canvas>
+<p>Move around with w,s,a,d and up down arrows.</p>
+</div>
+</body>
+</html>
