@@ -200,4 +200,8 @@ Cube.prototype.rotate = function(angle,axis){
     this.verticesUptoDate = false;
 };
 
+Cube.prototype.addTrans = function(funcMatr){
+    this.objMatr = mult(funcMatr,this.objMatr);
+    this.verticesUptoDate = false;
+};
 

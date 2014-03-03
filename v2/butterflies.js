@@ -1,7 +1,14 @@
+
 //butterflies.js (C) 2014 Matthias Pall Gissurarson
 var canvas;
 var gl;
 
+var theta = [ 0, 0, 0 ];
+var temptheta = [ 0, 0, 0 ];
+var spin = [0,0,0];
+var mouse = [0,0];
+var orig = [0,0];
+var mouseDown = false;
 
 var cBuffer;
 var vColor;
@@ -9,7 +16,7 @@ var vBuffer;
 var vPosition;
 var butterflies;
 
-var eye = vec3(0.1,5.0,20.0);
+var eye = vec3(0.0,0.0,23.0);
 var at = vec3(0.0,0.0,0.0);
 var up = vec3(0.0,1.0,0.0);
 var modelViewM;
@@ -17,7 +24,8 @@ var projectionM;
 var shouldQuit = false;
 var shouldUpdate = false;
 var shouldSingleStep = false;
-
+var rot = [0,0,0,0];
+var cube;
 var colors = [
 [1.0,0.0,0.0,1.0],
 [1.0,1.0,0.0,1.0],
@@ -28,10 +36,21 @@ var colors = [
 [0.0,0.0,1.0,1.0]
 ];
 
+var flock = true;
+var maxdist = 10;
+var mindist = 0.2; 
+var maxangl =  90;
+var limit = [6.5,6.5,6.5];
+var sepfactor = 0.15;
+var alignfactor = 0.85;
+var cohefactor = 0.55;
+var initsize = 0.2;
+var initspeed = 4/100.0;
+
 function randomButterfly(insize,inspeed){
 
     var size = insize || 1;
-    var speed  = 1;
+    var speed  = inspeed || 1;
     if (inspeed !== undefined){
 	speed = inspeed;
     }
@@ -39,19 +58,20 @@ function randomButterfly(insize,inspeed){
 
     var ulcol = colors[Math.floor(Math.random()*colors.length)];
     var llcol = colors[Math.floor(Math.random()*colors.length)];
-    var vel = [1-2*Math.random(),1-2*Math.random(),1-2*Math.random(),0];
-    if (length(vel) != 0)
-	vel = normalize(vel);
-    vel = scale(speed,vel);
+    var dir = [1-2*Math.random(),1-2*Math.random(),1-2*Math.random(),0];
+    dir = normalize(dir);
     return new Butterfly({
 	"ulcols" : [ulcol],
 	"llcols" : [llcol],
 	"urcols" : [llcol],
 	"lrcols" : [ulcol],
 	"size" : size,
-	"startLoc": [3-6*Math.random(),3-6*Math.random(),3-6*Math.random(),1],
-	"startVel": vel,
-	"flapSpeed":  Math.random()*5 + 2
+	"startLoc": [4-8*Math.random(),4-8*Math.random(),4-8*Math.random(),1],
+	"startDir": dir,
+	"startSpeed" : inspeed*Math.random()*2 +inspeed,
+	"flapSpeed":  Math.random()*10 +5,
+	"decisionTime": Math.random()*10+2,
+	"startAngle": 45-90*Math.random()
     });
 
 
@@ -65,28 +85,18 @@ window.onload = function init()
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
 
+    cube = new Cube();
+    cube.scale(limit[0]*2,limit[1]*2,limit[2]*2);
     butterflies = [];
-    for(var b = 0; b < 20; b++){
-	//butterflies.push(randomButterfly(0.2,5));
+    for(var b = 0; b < 30; b++){
+	var nb = randomButterfly(initsize,initspeed);
+	butterflies.push(nb);
     };
+    
+    //first = butterflies[0];
     var ulcol = colors[3];
     var llcol = colors[6];
-    butterflies.push(
-	new Butterfly({
-	    /*
-	    "ulcols" : [ulcol],
-	    "llcols" : [llcol],
-	    "urcols" : [llcol],
-	    "lrcols" : [ulcol],
-	     */
-	    "color" : [[1,1,1,1]],
-	    "startVel" : [0,0,0.0,0],
-	    "flapSpeed" : 5,
-	    "size" : 1
-	    }));
 
-    b = butterflies[0];
-    //b.direct([1,0,0,0]);
     //b.orient([0,1,0,0]);
     //b.direct([1,0.4,0,0]);
     console.log(b.direction,b.normal);
@@ -118,6 +128,7 @@ window.onload = function init()
     gl.mVMLoc = gl.getUniformLocation(program, "modelViewMatrix");
     gl.pMLoc = gl.getUniformLocation(program, "projectionMatrix");
     gl.objMLoc = gl.getUniformLocation(program, "objectMatrix");
+    gl.thetaLoc = gl.getUniformLocation(program, "theta"); 
     window.requestAnimFrame(main);
 };
 
@@ -137,9 +148,90 @@ function update(dt) {
     //
     var du = (dt / NOMINAL_UPDATE_INTERVAL);
 
-    butterflies.map(function(b) {b.update(du/100);});
+    for(var b in butterflies){
+	updateButterf(b,du);
+    }
+    for(var b in butterflies){
+	butterflies[b].update(du);
+    }
 
 }
+
+function updateButterf(ind,du){
+    var b = butterflies[ind];
+    var p = b.loc;
+    if(flock && b.timeSinceLastDirect > b.decisionTime){
+	var inrange = [];
+	for(var inde in butterflies){
+	    if(inde === ind)
+		continue;
+	    var b2 = butterflies[inde];
+	    var los = add(p,negate(b2.loc));
+	    var d = length(los);
+	    var b2dir = normalize(los);
+	    var dir = b.dir.slice(0);
+
+	    dir.splice(3,1);
+	    b2dir.splice(3,1);
+	    dir.splice(0,1);
+	    b2dir.splice(0,1);
+	    var cos= dot(b2dir,dir);
+	    //var sin = length(cross(b2dir,dir));
+	    var angl1 = Math.abs(Math.acos(cos)*180/Math.PI);
+	    var b2dir = normalize(los);
+	    var dir = b.dir.slice(0);
+	    dir.splice(3,1);
+	    b2dir.splice(3,1);
+	    dir.splice(1,1);
+	    b2dir.splice(1,1);
+	    var cos= dot(b2dir,dir);
+	    var angl2 = Math.abs(Math.acos(cos)*180/Math.PI);
+	    if (d < maxdist && angl1 < maxangl && angl2 < maxangl){
+		inrange.push(inde);
+	    }
+
+	};
+	if(inrange.length > 0){
+	    var avgloc = vec4(0,0,0,0);
+	    var avgdir = vec4(0,0,0,0);
+	    var toocloseLoc = vec4(0,0,0,1);
+	    var tooclose = 0;
+	    for(var butterf in inrange){
+		var inde = inrange[butterf];
+		var but = butterflies[inde];
+		var los = add(p,negate(but.loc));
+		var d = length(los);
+		avgloc = add(avgloc,but.loc);
+		avgdir = add(avgdir,but.dir);
+		if(d < mindist){
+		    toocloseLoc = add(toocloseLoc,but.loc);
+		    tooclose += 1;
+		};
+	    };
+	    var N = 1.0*inrange.length;
+	    avgloc = scale(1/N,avgloc);
+	    var toavg = add(avgloc,negate(p));
+	    avgdir = scale(1/N,avgdir);
+	    if(tooclose > 0){
+		toocloseLoc = scale(1/(1.0*tooclose),toocloseLoc);
+	    }
+	    var fromtooclose = add(p,negate(toocloseLoc));
+	    var newDir = add(scale(cohefactor,toavg),scale(alignfactor,avgdir));
+	    newDir = add(newDir,scale(sepfactor,fromtooclose));
+	    newDir = normalize(newDir);
+	    b.direct(newDir);
+	};
+    }
+    var newLoc = b.loc.slice(0);
+    for(var i in b.loc){
+	if(Math.abs(b.loc[i])+2*b.size > limit[i]){
+	    newLoc[i] = -1*sign(newLoc[i])*(limit[i] - 2*b.size - 0.1);
+	}
+    };
+    b.translate(negate(b.loc));
+    b.translate(newLoc);
+    //b.update(du);
+};
 
 var lastUpdate = 0;
 
@@ -163,15 +255,27 @@ function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    modelViewM = lookAt(eye,at,up);
+    var rotM = mat4();
+    var truetheta = add(theta,temptheta);
+    rotM = mult(rotate(truetheta[1],[1,0,0,0]),rotM);
+    rotM = mult(rotate(truetheta[0],[0,1,0,0]),rotM);
+    //rotM = mult(rotate(truetheta[2],[0,0,1,0]),rotM);
+    var neye = eye.slice(0);
+    neye[3] = 1;
+    neye = mulMV(rotM,neye);
+    neye.splice(3,1);
+    if(neye[0] === 0 && neye[1] !== 0 && neye[2] === 0){
+	neye[2] = 0.01;
+    }
+    modelViewM = lookAt(neye,at,up);
     //Setjum sma perspective til ad gera thetta thaeginlegra
     projectionM = perspective(45,canvas.width/canvas.height,100.0,0.1);
-
     
     gl.uniformMatrix4fv(gl.mVMLoc,false,flatten(modelViewM));
     gl.uniformMatrix4fv(gl.pMLoc,false,flatten(projectionM));
     
     butterflies.map(function (body){body.render(gl);});
+    cube.render(gl);
     /*
     //Lika haegt ad gera svona:
     //Meira efficient, en ekki alveg jafn hentugt
@@ -238,3 +342,90 @@ function handleKeyDown(evt){
 };
 
 window.addEventListener("keydown", handleKeyDown);
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById("alignnum").innerHTML = alignfactor;
+  document.getElementById("sepnum").innerHTML = sepfactor;
+  document.getElementById("cohenum").innerHTML = cohefactor;
+  document.getElementById("align").value = alignfactor;
+  document.getElementById("sep").value = sepfactor;
+  document.getElementById("cohe").value = cohefactor;
+    
+document.getElementById("align").onchange=function(e){
+  alignfactor = parseFloat(this.value);
+  document.getElementById("alignnum").innerHTML = alignfactor;
+};
+document.getElementById("sep").onchange=function(e){
+  sepfactor = parseFloat(this.value);
+  document.getElementById("sepnum").innerHTML = sepfactor;
+};
+document.getElementById("cohe").onchange=function(e){
+  cohefactor = parseFloat(this.value);
+  document.getElementById("cohenum").innerHTML = cohefactor;
+};
+document.getElementById("addb").onclick=function(e){
+    addbutterf();
+};
+document.getElementById("pause").onclick=function(e){
+    shouldUpdate = !shouldUpdate;
+};
+
+});
+
+function addbutterf(){
+    console.log("adding butterfly");
+    butterflies.push(randomButterfly(initsize,initspeed));
+};
+
+
+function handleMouse(evt,type) {
+
+    if(type === "scroll"){
+	eye[2] -= sign(evt.wheelDelta);
+    };
+    var rect = canvas.getBoundingClientRect();
+    var pos = [rect.left,rect.top];
+    if(type == "up"){
+	mouseDown = false;
+	var x =  mouse[0]-orig[0];
+	var y =  mouse[1]-orig[1];
+	theta[0] += x;
+	//var truex = theta[0];
+	//var cosx = Math.cos(truex);
+	//var sinx = Math.sin(truex);
+	theta[1] += y;
+	//theta[2] += sinx*y;
+	theta = angleBound(theta);
+	theta.splice(3,1);
+	temptheta = [0,0,0];
+    }
+    if(type==="down") {
+	mouseDown = true;
+	mouse = [evt.clientX - pos[0]-256,evt.clientY - pos[1]-256];
+	orig = [mouse[0],mouse[1]];
+	}
+    if(type === "move"){
+	if (mouseDown){
+	    mouse = [evt.clientX - pos[0]-256,evt.clientY - pos[1]-256];
+	    var x =  mouse[0]-orig[0];
+	    var y =  mouse[1]-orig[1];
+	    temptheta[0] = x;
+	    //var truex = theta[0] + x;
+	    //var cosx = Math.cos(truex);
+	    //var sinx = Math.sin(truex);
+	    temptheta[1] = y;
+	    //temptheta[2] = sinx*y;
+	}
+    }
+}
+
+
+function handleMouseScroll(evt) {handleMouse(evt,"scroll");};
+function handleMouseDown(evt) {handleMouse(evt,"down");};
+function handleMouseMove(evt) {handleMouse(evt,"move");};
+function handleMouseUp(evt) {handleMouse(evt,"up");};
+
+window.addEventListener("mouseup", handleMouseUp);
+window.addEventListener("mousedown", handleMouseDown);
+window.addEventListener("mousemove", handleMouseMove);
+window.addEventListener("mousewheel", handleMouseScroll);

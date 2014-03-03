@@ -13,6 +13,18 @@ function mulMV(matr,vec){
 
 };
 
+function angleBound(rot){
+    var r = [rot[0] % 360,rot[1] % 360,rot[2] % 360,rot[3]];
+    return r;
+};
+
+function sign(x){
+    if( x===0){
+	return 0;
+    };
+    return x/length(vec2(x,0));
+};
+
 
 /*
 N: modelViewM = AzElView(azim,elev,loc)

@@ -44,7 +44,6 @@ main()
   }
   p {
    font-family: terminus, monospace;
-   font-size: 25px;
    float:left;
   }
   
@@ -52,11 +51,28 @@ main()
 
 <body style="background: black; color: lime">
 <div id="container">
-<canvas id="gl-canvas" width="800" height="512" style="" oncontextmenu="return false;">
+<canvas id="gl-canvas" width="512" height="512" style="" oncontextmenu="return false;">
   <p> Your browser does not seem to support WebGL. This is how it should look like: </p>
   <!--<img src="solarSystem.png" alt="WebGL Render" />-->
 </canvas>
-<p>Move around with w,s,a,d and up down arrows.</p>
+<div id="info" style="display: block;">
+    <p style="font-size:25px;">
+      Move around with mouse and mousewheel.
+    </p>
+    <br />
+    <label for="align">Align factor <div id="alignnum"></div></align>
+    <input type="range" id="align" name="align" min="-1" max="1" step="0.05">
+    <br />		    
+    <label for="sep">Seperation factor <div id="sepnum"></div></align>
+    <input type="range" id="sep"  name="sep"    min="-1" max="1" step="0.05">
+    <br />		    			       
+    <label for="cohe">Cohesion factor <div id="cohenum"></div></align>
+    <input type="range" id="cohe" name="cohe"   min="-1" max="1" step="0.05">
+    <br />
+    <input type="button" id="addb" value="Add butterfly">
+    <input type="button" id="pause" value="Pause/Unpause">
+    <br />
+</div>
 </div>
 </body>
 </html>

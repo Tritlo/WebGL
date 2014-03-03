@@ -478,12 +478,13 @@ function normalize( u )
     if ( !isFinite(len) ) {
         throw "normalize: vector " + u + " has zero length";
     }
-    
+
+    var b = [];
     for ( var i = 0; i < u.length; ++i ) {
-        u[i] /= len;
+	b.push(u[i] / len);
     }
 
-    return u;
+    return b;
 }
 
 //----------------------------------------------------------------------------

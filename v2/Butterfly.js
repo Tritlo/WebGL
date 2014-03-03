@@ -1,18 +1,18 @@
 function Butterfly(descr){
     this.loc = [0,0,0,1.0];
-    this.normal = [0,0,1,0];
-    this.direction = [0,1,0,0];
-    this.rot = 0;
-    this.vel = [0,0,0,0];
+    this.rot = [0,0,0,0];
+    this.dir = [0,1,0,0];
+    this.speed = 1;
     this.wingAngle = 0;
     this.flapDir = 1;
     this.flapSpeed = 10;
     this.size=1;
+    this.timeSinceLastDirect = Infinity;
+    this.decisionTime = 5;
     for(var prop in descr){
 	this[prop] = descr[prop];
     }
     this.init();
-    
 }
 
 
@@ -37,35 +37,23 @@ Butterfly.prototype.init = function (){
     
 
     this.wings = [upperleft,lowerleft,upperright,lowerright];
-    for(var part in this.wings){
-	//this.wings[part].renderVertices = true;
-	//this.wings[part].normal = this.normal;
+    //this.direct([0,0,1,0]);
+    if(this.startDir){
+	this.direct(this.startDir);
     }
-    /*
-    
-    for(var part in this.wings){
-	this.wings[part].normal = this.normal;
-    }
-     */
-
-    /*
     if(this.startLoc)
 	this.translate(this.startLoc);
-    if(this.startVel){
-	this.updateVel(this.startVel); 
-    }
-     */
-    
-    
-
-    //this.orient(this.normal);
+    if(this.startSpeed !== undefined)
+	this.speed = this.startSpeed;
+    if(this.startAngle)
+	this.setWingAngle(this.startAngle);
 
 };
 
 Butterfly.prototype.update = function(du){
-    this.translate(scale(du,this.vel));
-    //this.updateVel(add([0.0001,0.0001,0.0,0.0],this.vel));
+    this.timeSinceLastDirect += du;
     this.updateWings(du);
+    this.translate(scale(du*this.speed,this.dir));
 };
 
 Butterfly.prototype.translate = function(vec){
@@ -73,23 +61,37 @@ Butterfly.prototype.translate = function(vec){
 	this.wings[part].translate(vec);
     }
     this.loc = add(this.loc,vec);
-
+    this.loc[3] = 1;
 };
 
-Butterfly.prototype.orient = function(newNormal){
-    for(var part in this.wings){
-	this.wings[part].orient(newNormal,this.loc);
-    };
-    this.normal = newNormal;
-};
 
 
 Butterfly.prototype.updateWings = function(du){
     if (Math.abs(this.wingAngle) > 45){
 	this.flapDir = -this.flapDir;
     }
-
     this.increaseWingAngle(this.flapDir*this.flapSpeed);
+};
+Butterfly.prototype.applyMatrix = function(matr){
+    for(var part in this.wings){
+	this.wings[part].applyMatrix(matr);
+    };
+    
+};
+
+Butterfly.prototype.setWingAngle = function(angle){
+
+    var currAngle = this.wingAngle;
+    var dir = this.dir;
+    this.wings[0].rotateAround(this.loc,currAngle, dir);
+    this.wings[1].rotateAround(this.loc,currAngle, dir);
+    this.wings[2].rotateAround(this.loc,-currAngle,dir);
+    this.wings[3].rotateAround(this.loc,-currAngle,dir);
+    this.wings[0].rotateAround(this.loc,angle, dir);
+    this.wings[1].rotateAround(this.loc,angle, dir);
+    this.wings[2].rotateAround(this.loc,-angle,dir);
+    this.wings[3].rotateAround(this.loc,-angle,dir);
+    this.wingAngle = angle;
 
 
 };
@@ -97,57 +99,46 @@ Butterfly.prototype.updateWings = function(du){
 Butterfly.prototype.increaseWingAngle = function(angle){
 
     this.wingAngle += angle;
-
-    this.orient([0,0,1,0]);
-    this.wings[0].rotateAround(this.loc,angle, [0,1,0,0]);
-    this.wings[1].rotateAround(this.loc,angle, [0,1,0,0]);
-    this.wings[2].rotateAround(this.loc,-angle,[0,1,0,0]);
-    this.wings[3].rotateAround(this.loc,-angle,[0,1,0,0]);
+    var dir = this.dir;
+    this.wings[0].rotateAround(this.loc,angle, dir);
+    this.wings[1].rotateAround(this.loc,angle, dir);
+    this.wings[2].rotateAround(this.loc,-angle,dir);
+    this.wings[3].rotateAround(this.loc,-angle,dir);
     
-
 };
 
-Butterfly.prototype.rotate = function(angle){
-    var norm = this.normal;
-    var loc = this.loc;
-    this.translate(negate(loc));
-    this.orient([0,0,1,0]);
-    for(var part in this.wings){
-	this.wings[part].rotate(this.loc,angle,[0,0,1]);
+Butterfly.prototype.rotate = function(rotateAngle,rotcenter){
+    var center = rotcenter || this.loc;
+    var angl = length(rotateAngle);
+    //debugger;
+    if(angl > 0){
+	var rotM = mat4();
+	rotM = mult(rotate(rotateAngle[0],[1,0,0]),rotM);
+	rotM = mult(rotate(rotateAngle[1],[0,1,0]),rotM);
+	rotM = mult(rotate(rotateAngle[2],[0,0,1]),rotM);
+        for(var part in this.wings){
+	  this.wings[part].rotateAround(center,rotateAngle[0],[1,0,0,0]);
+	  this.wings[part].rotateAround(center,rotateAngle[1],[0,1,0,0]);
+	  this.wings[part].rotateAround(center,rotateAngle[2],[0,0,1,0]);
+	}
+       this.rot  = add(rotateAngle,this.rot);
+       this.rot = angleBound(this.rot);
+       this.dir = mulMV(rotM,this.dir);
     }
-    this.orient(norm);
-    this.translate(loc);
-
 };
 
 Butterfly.prototype.direct = function(newDirection){
-    var newDir = newDirection;
-    var cr = cross(newDir,this.direction);
-    console.log(length(cr));
-    if(length(cr) > 0){
-	var angl = Math.asin(length(cr))*180/(Math.PI);
-	var ncr = normalize(cr);
-	var rotM = rotate(-angl,ncr);
-	var newNormal = mulMV(rotM,this.normal);
-	console.log(newNormal,this.normal);
-    } else {
-	var newNormal = negate(this.normal);
-    }
-    for(var part in this.wings){
-	this.wings[part].direct(newDirection,this.loc);
-    }
-    this.orient(newNormal);
-    this.normal = newNormal;
-    this.direction = newDir;
-};
-
-Butterfly.prototype.updateVel = function(newVel){
-
-    if(length(newVel) != 0){
-	this.direct(normalize(newVel));
-	//this.flapSpeed = length(newVel) +1;
-    };
-    this.vel = newVel;
+    this.timeSinceLastDirect = 0;
+    var dir = this.dir;
+    var change = add(dir,negate(newDirection));
+    //if(length(change) < 0.5){
+	//return;
+    //}
+    var cr = cross(newDirection,dir);
+    var angle = Math.asin(length(cr))*180/Math.PI;
+    var nrot = scale(-angle,normalize(cr));
+    nrot[3] = 0;
+    this.rotate(nrot);
 };
 
 Butterfly.prototype.render = function (gl){
