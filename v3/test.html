@@ -1,7 +1,11 @@
 <html>
+  <script src="../Common/glMatrixEA.js"></script>
   <script src="PlyReader.js"></script>
     <script type="text/JavaScript">
+      function pV(model){
+      console.log(model);
+      };
       var plyReader = PlyReader();
-      plyReader.read("teapot.ply");
+      plyReader.read("teapot.ply",pV);
       </script>
   </html>
