@@ -1,11 +1,68 @@
 <html>
-  <script src="../Common/glMatrixEA.js"></script>
-  <script src="PlyReader.js"></script>
-    <script type="text/JavaScript">
-      function pV(model){
-      console.log(model);
-      };
-      var plyReader = PlyReader();
-      plyReader.read("teapot.ply",pV);
-      </script>
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+attribute  vec2 vTexCoord;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat4 objectMatrix;
+
+varying vec4 color;
+varying vec2 texCoord;
+
+void main() 
+{
+    color = vColor;
+    //texCoord = vTexCoord;
+    gl_Position = projectionMatrix*modelViewMatrix*objectMatrix*vPosition;
+} 
+</script>
+<script id="fragment-shader" type="x-shader/x-fragment">
+#ifdef GL_ES
+precision highp float;
+#endif
+
+varying vec4 color;
+varying  vec2 texCoord;
+uniform sampler2D texture;
+
+void main()
+{
+    gl_FragColor = color;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/glMatrixEA.js"></script>
+<script type="text/javascript" src="../Common/glUtil.js"></script>
+<script src="util.js"></script>
+<script src="Cube.js"></script>
+<script src="Model.js"></script>
+<script src="PlyReader.js"></script>
+<script src="htmltest.js"></script>
+<style>
+  #gl-canvas {
+  border: 1px solid lime;
+  }
+  p {
+   font-family: terminus, monospace;
+   float:left;
+  }
+  .slid {
+  float: left;
+  }
+  
+</style>
+
+<body style="background: black; color: lime">
+<div id="container" style="width: 512;">
+<canvas id="gl-canvas" width="600" height="350" style="" oncontextmenu="return false;">
+  <p> Your browser does not seem to support WebGL. This is how it should look like: </p>
+  <!--<img src="solarSystem.png" alt="WebGL Render" />-->
+</canvas>
+</div>
+</body>
+</html>
   </html>

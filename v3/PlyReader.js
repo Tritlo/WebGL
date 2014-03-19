@@ -1,9 +1,3 @@
-function Model(points,normals,polys){
-    
-    this.vertices = points;
-    this.normals = normals;
-    this.polys = polys;
-}
 
 function point3D(x, y, z)
   {
@@ -173,15 +167,16 @@ var parser = {
 	  vertices[i+0] /= scaleY;
 	  vertices[i+1] /= scaleY;
 	  vertices[i+2] /= scaleY;
-	  points.push(point3.create([vertices[i],vertices[i+1],vertices[i+2]]));
-	  normals.push(point3.create([vertexNormals[i],vertexNormals[i+1],
-				     vertexNormals[i+2]]));
+	  points.push(point4.create([vertices[i],vertices[i+1],vertices[i+2],1]));
+	  normals.push(point4.create([vertexNormals[i],vertexNormals[i+1],
+				     vertexNormals[i+2],1]));
 	};
 
 
 	// Create model
-	//var model = new Model(points, normals, pols);
-	var model = new Model(vertices, vertexNormals, polys);
+	var model = new Model({"points": points, "normals":normals, "pols":pols});
+	//var model = new Model({"vertices": vertices, "normals":normals, "pols":pols});
+	//var model = new Model(vertices, vertexNormals, polys);
 	if(callback){
 	    callback(model);
 	} else {
