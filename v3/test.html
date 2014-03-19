@@ -16,12 +16,14 @@ varying vec2 texCoord;
 
 void main() 
 {
-    vec3 pos = -(modelViewMatrix * objectMatrix*vPosition).xyz;
+    //vec3 pos = -(modelViewMatrix * objectMatrix*vPosition).xyz;
+    vec3 pos = -( projectionMatrix*modelViewMatrix*vPosition).xyz;
     vec3 light = lightPosition.xyz;
     L = normalize( light - pos );
     E =  -pos;
     color = vColor;
-    N = normalize( (modelViewMatrix*objectMatrix*vNormal).xyz);
+    //N = normalize( (modelViewMatrix*objectMatrix*vNormal).xyz);
+    N = normalize( (vNormal).xyz);
     //texCoord = vTexCoord;
     gl_Position = projectionMatrix*modelViewMatrix*objectMatrix*vPosition;
 } 

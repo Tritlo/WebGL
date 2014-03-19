@@ -12,7 +12,7 @@ var eye = vec3.create([0.0,0.0,2.0]);
 var at = vec3.create([0.0,0.0,0.0]);
 var up = vec3.create([0.0,1.0,0.0]);
 
-var lightPosition = vec4.create([1.0, 1.0, 1.0, 0.0] );
+var lightPosition = vec4.create([0.0, 0.0, 2.0, 1.0] );
 var lightAmbient =  vec4.create([0.2, 0.2, 0.2, 1.0  ]);
 var lightDiffuse =  vec4.create([ 1.0, 1.0, 1.0, 1.0 ]);
 var lightSpecular = vec4.create([ 1.0, 1.0, 1.0, 1.0 ]);
