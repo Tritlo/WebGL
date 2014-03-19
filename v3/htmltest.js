@@ -8,11 +8,12 @@ var mouse = [0,0];
 var orig = [0,0];
 var mouseDown = false;
 
-var eye = vec3.create([0.0,0.0,2.0]);
+//var eye = vec3.create([0.0,0.0,2.0]);
+var eye = vec3.create([0.0,0.0,0.0]);
 var at = vec3.create([0.0,0.0,0.0]);
 var up = vec3.create([0.0,1.0,0.0]);
 
-var lightPosition = vec4.create([0.0, 0.0, 2.0, 1.0] );
+var lightPosition = vec4.create([1.0, 1.0, 2.0, 1.0] );
 var lightAmbient =  vec4.create([0.2, 0.2, 0.2, 1.0  ]);
 var lightDiffuse =  vec4.create([ 1.0, 1.0, 1.0, 1.0 ]);
 var lightSpecular = vec4.create([ 1.0, 1.0, 1.0, 1.0 ]);
@@ -32,6 +33,7 @@ var shouldQuit = false;
 var shouldUpdate = false;
 var shouldSingleStep = false;
 var mod;
+var plyReader = PlyReader();
 window.onload = function init() {
 
     ambientProduct =  vec4.mult(lightAmbient, materialAmbient);
@@ -64,7 +66,7 @@ window.onload = function init() {
     gl.vPosition = gl.getAttribLocation( program, "vPosition" );
     gl.vColor = gl.getAttribLocation( program, "vColor" );
     console.log(gl.vNormal,gl.vColor,gl.vPosition,gl.vTex);
-    
+    gl.lightPos = gl.getUniformLocation(program, "lightPosition");
     
     if(gl.vColor && gl.vColor > 0){
 	gl.enableVertexAttribArray( gl.vColor );
@@ -92,13 +94,13 @@ window.onload = function init() {
     gl.uniform4fv( gl.getUniformLocation(program, 
        "specularProduct"),specularProduct );	
     gl.uniform4fv( gl.getUniformLocation(program, 
-       "lightPosition"),lightPosition);
+       "lightPosition"),[eye[0],eye[1],eye[2],1]);
     
     gl.uniform1f( gl.getUniformLocation(program, 
        "shininess"),materialShininess );
     
-    var plyReader = PlyReader();
     plyReader.read("teapot.ply",onModelReady);
+    //plyReader.read("cube.ply",onModelReady);
 };
 
 function onModelReady(mel){
@@ -156,6 +158,10 @@ function render()
     if(neye[0] === 0 && neye[1] !== 0 && neye[2] === 0){
 	neye[2] = 0.01;
     }
+    var lp = vec4.create(neye);
+    //var lp = vec4.negate(lp);
+    lp[3] = 1;
+    gl.uniform4fv( gl.lightPos,lp);
     modelViewM = mat4.lookAt(neye,at,up);
     //Setjum sma perspective til ad gera thetta thaeginlegra
     projectionM = mat4.perspective(45,canvas.width/canvas.height,0.1,100);

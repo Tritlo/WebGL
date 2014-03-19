@@ -21,7 +21,8 @@ var parser = {
 	{
 	  var retval = data.match(/.*/);
 	  var str = retval[0];
-	  data = data.substr(str.length+1);
+	  data = data.substr(data.indexOf("\n")+1);
+	  //data = data.substr(str.length+1);
 
 	  retval = str.match(/element (\w+) (\d+)/);
 	  if(retval)
@@ -47,7 +48,8 @@ var parser = {
 	{
 	  retval = data.match(/([\d.-]+ ?)+/);
 	  str = retval[0];
-	  data = data.substr(str.length+2);
+	  //data = data.substr(str.length+1);
+	  data = data.substr(data.indexOf("\n")+1);
 	  retval = str.match(/([\d.-]+)/g);
 	  var point = new point3D(parseFloat(retval[0]),
 				  parseFloat(retval[1]), parseFloat(retval[2]));
@@ -75,7 +77,8 @@ var parser = {
 	{
 	  var retval = data.match(/(\d+ ?)+/);
 	  var str = retval[0];
-	  data = data.substr(str.length+2);
+	  data = data.substr(data.indexOf("\n")+1);
+	  //data = data.substr(str.length+2);
 
 	  var retval = str.match(/(\d+)/g);
 	  var nvertex = parseInt(retval[0]);
@@ -167,6 +170,7 @@ var parser = {
 	  vertices[i+0] /= scaleY;
 	  vertices[i+1] /= scaleY;
 	  vertices[i+2] /= scaleY;
+	    
 	  points.push(point4.create([vertices[i],vertices[i+1],vertices[i+2],1]));
 	  normals.push(point4.create([vertexNormals[i],vertexNormals[i+1],
 				     vertexNormals[i+2],1]));

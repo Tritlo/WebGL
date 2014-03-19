@@ -1,10 +1,11 @@
 var fs = require("fs");
+eval(fs.readFileSync("./Model.js")+'');
 eval(fs.readFileSync("./PlyReader.js")+'');
 eval(fs.readFileSync("../Common/glMatrixEA.js")+'');
 var plyReader = PlyReader();
 function pV(model){
-    console.log(model.vertices[0]);
+    console.log(model.points);
 };
 
-plyReader.read("teapot.ply",pV);
+plyReader.read("cube.ply",pV);
 
