@@ -1587,14 +1587,14 @@ mat4.multiplyVec4 = function(mat, vec, dest) {
  * Params:
  * mat - mat4 to translate
  * vec - vec3 specifying the translation
- * dest - Optional, mat4 receiving operation result. If not specified result is written to mat
+ * dest - Optional, mat4 receiving operation result.
+ If not specified result is written to mat
  *
  * Returns:
  * dest if specified, mat otherwise
  */
 mat4.translate = function(mat, vec, dest) {
 	var x = vec[0], y = vec[1], z = vec[2];
-	
 	if(!dest || mat == dest) {
 		mat[12] = mat[0]*x + mat[4]*y + mat[8]*z + mat[12];
 		mat[13] = mat[1]*x + mat[5]*y + mat[9]*z + mat[13];

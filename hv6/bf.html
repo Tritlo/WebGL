@@ -1,42 +1,47 @@
 <html>
-
 <script id="vertex-shader" type="x-shader/x-vertex">
-
 attribute  vec4 vPosition;
 attribute  vec4 vColor;
-varying vec4 fColor;
+attribute  vec2 vTexCoord;
 
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
 uniform mat4 objectMatrix;
 
+varying vec4 color;
+varying vec2 texCoord;
+
 void main() 
 {
-    fColor = vColor;
+    color = vColor;
+    texCoord = vTexCoord;
     gl_Position = projectionMatrix*modelViewMatrix*objectMatrix*vPosition;
 } 
 </script>
-
 <script id="fragment-shader" type="x-shader/x-fragment">
+#ifdef GL_ES
+precision highp float;
+#endif
 
-precision mediump float;
-   
-varying vec4 fColor;
+varying vec4 color;
+varying  vec2 texCoord;
+uniform sampler2D texture;
 
-void
-main()
+void main()
 {
-    gl_FragColor = fColor;
+    gl_FragColor = color*texture2D( texture, texCoord );
 }
 </script>
 
+
 <script type="text/javascript" src="../Common/webgl-utils.js"></script>
 <script type="text/javascript" src="../Common/initShaders.js"></script>
-<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="../Common/glMatrixEA.js"></script>
+<script type="text/javascript" src="../Common/glUtil.js"></script>
 <script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="Cube.js"></script>
 <script type="text/javascript" src="Butterfly.js"></script>
-<script type="text/javascript" src="butterflies.js"></script>
+<script type="text/javascript" src="bf.js"></script>
 <style>
   #gl-canvas {
   border: 1px solid lime;
@@ -53,7 +58,7 @@ main()
 
 <body style="background: black; color: lime">
 <div id="container" style="width: 512;">
-<canvas id="gl-canvas" width="512" height="512" style="" oncontextmenu="return false;">
+<canvas id="gl-canvas" width="400" height="400" style="" oncontextmenu="return false;">
   <p> Your browser does not seem to support WebGL. This is how it should look like: </p>
   <!--<img src="solarSystem.png" alt="WebGL Render" />-->
 </canvas>
@@ -61,23 +66,6 @@ main()
     <p style="font-size:25px;">
       Move around with mouse and mousewheel.
     </p>
-    <br />
-    <div class="slid">
-    <label for="align">Align factor <div id="alignnum"></div></label>
-    <input type="range" id="align" name="align" min="-1" max="1" step="0.05">
-    </div>
-    <div class="slid">
-    <label for="sep">Seperation factor <div id="sepnum"></div></label>
-    <input type="range" id="sep"  name="sep"    min="-1" max="1" step="0.05">
-    </div>
-    <div class="slid">
-    <label for="cohe">Cohesion factor <div id="cohenum"></div></label>
-    <input type="range" id="cohe" name="cohe"   min="-1" max="1" step="0.05">
-    </div>
-    <div class="slid" style="width: 512px">
-    <input type="button" id="addb" value="Add butterfly"  style="float: left">
-    <input type="button" id="pause" value="Pause/Unpause" style="float: right">
-    </div>
 </div>
 </div>
 </body>

@@ -16,7 +16,7 @@ var vBuffer;
 var vPosition;
 var butterflies;
 
-var eye = vec3(0.0,0.0,23.0);
+var eye = vec3(0.0,0.0,60.0);
 var at = vec3(0.0,0.0,0.0);
 var up = vec3(0.0,1.0,0.0);
 var modelViewM;
@@ -37,15 +37,15 @@ var colors = [
 ];
 
 var flock = true;
-var maxdist = 10;
-var mindist = 0.2; 
+var maxdist = 30;
+var mindist = 0.5; 
 var maxangl =  90;
-var limit = [6.5,6.5,6.5];
-var sepfactor = 0.15;
-var alignfactor = 0.85;
-var cohefactor = 0.55;
+var limit = [20,20,20];
+var sepfactor = 0.2;
+var alignfactor = 0.45;
+var cohefactor = 0.8;
 var initsize = 0.2;
-var initspeed = 4/100.0;
+var initspeed = 6/100.0;
 
 function randomButterfly(insize,inspeed){
 
@@ -66,7 +66,7 @@ function randomButterfly(insize,inspeed){
 	"urcols" : [llcol],
 	"lrcols" : [ulcol],
 	"size" : size,
-	"startLoc": [4-8*Math.random(),4-8*Math.random(),4-8*Math.random(),1],
+	"startLoc": [(limit[0]-2*limit[0]*Math.random())/2,(limit[1]-2*limit[1]*Math.random())/2,(limit[2]-2*limit[2]*Math.random())/2,1],
 	"startDir": dir,
 	"startSpeed" : inspeed*Math.random()*2 +inspeed,
 	"flapSpeed":  Math.random()*10 +5,
@@ -77,6 +77,7 @@ function randomButterfly(insize,inspeed){
 
 };
 
+var first;
 window.onload = function init()
 {
     canvas = document.getElementById( "gl-canvas" );
@@ -88,12 +89,12 @@ window.onload = function init()
     cube = new Cube();
     cube.scale(limit[0]*2,limit[1]*2,limit[2]*2);
     butterflies = [];
-    for(var b = 0; b < 30; b++){
+    for(var b = 0; b < 50; b++){
 	var nb = randomButterfly(initsize,initspeed);
 	butterflies.push(nb);
     };
     
-    //first = butterflies[0];
+    first = butterflies[0];
     var ulcol = colors[3];
     var llcol = colors[6];
 
@@ -148,89 +149,98 @@ function update(dt) {
     //
     var du = (dt / NOMINAL_UPDATE_INTERVAL);
 
+    var newDirs = [];
     for(var b in butterflies){
-	updateButterf(b,du);
+	newDirs.push(flockDir(b));
     }
-    for(var b in butterflies){
-	butterflies[b].update(du);
+    for(var ind in butterflies){
+	var b = butterflies[ind];
+	var newLoc = b.loc.slice(0);
+	for(var i in b.loc){
+	    if(Math.abs(b.loc[i])+2*b.size > limit[i]){
+		newLoc[i] = -1*sign(newLoc[i])*(limit[i] - 2*b.size - 0.1);
+	    }
+	};
+	b.translate(negate(b.loc));
+	b.translate(newLoc);
+	if(newDirs[ind]){
+	    var nd = newDirs[ind];
+	    var od = b.dir;
+	    //b.direct(newDirs[ind]);
+	    b.direct(scale(0.5,add(nd,od)));
+	    b.speed = ((initspeed*Math.random()*4)+b.speed)/2;
+	    b.flapSpeed = b.speed*100;
+	}
+	b.update(du);
     }
 
 }
 
-function updateButterf(ind,du){
-    var b = butterflies[ind];
+function flockDir(butterflyIndex){
+    var b = butterflies[butterflyIndex];
     var p = b.loc;
-    if(flock && b.timeSinceLastDirect > b.decisionTime){
-	var inrange = [];
-	for(var inde in butterflies){
-	    if(inde === ind)
-		continue;
-	    var b2 = butterflies[inde];
-	    var los = add(p,negate(b2.loc));
-	    var d = length(los);
-	    var b2dir = normalize(los);
-	    var dir = b.dir.slice(0);
-
-	    dir.splice(3,1);
-	    b2dir.splice(3,1);
-	    dir.splice(0,1);
-	    b2dir.splice(0,1);
-	    var cos= dot(b2dir,dir);
-	    //var sin = length(cross(b2dir,dir));
-	    var angl1 = Math.abs(Math.acos(cos)*180/Math.PI);
-	    var b2dir = normalize(los);
-	    var dir = b.dir.slice(0);
-	    dir.splice(3,1);
-	    b2dir.splice(3,1);
-	    dir.splice(1,1);
-	    b2dir.splice(1,1);
-	    var cos= dot(b2dir,dir);
-	    var angl2 = Math.abs(Math.acos(cos)*180/Math.PI);
-	    if (d < maxdist && angl1 < maxangl && angl2 < maxangl){
-		inrange.push(inde);
-	    }
-
-	};
-	if(inrange.length > 0){
-	    var avgloc = vec4(0,0,0,0);
-	    var avgdir = vec4(0,0,0,0);
-	    var toocloseLoc = vec4(0,0,0,1);
-	    var tooclose = 0;
-	    for(var butterf in inrange){
-		var inde = inrange[butterf];
-		var but = butterflies[inde];
-		var los = add(p,negate(but.loc));
-		var d = length(los);
-		avgloc = add(avgloc,but.loc);
-		avgdir = add(avgdir,but.dir);
-		if(d < mindist){
-		    toocloseLoc = add(toocloseLoc,but.loc);
-		    tooclose += 1;
-		};
-	    };
-	    var N = 1.0*inrange.length;
-	    avgloc = scale(1/N,avgloc);
-	    var toavg = add(avgloc,negate(p));
-	    avgdir = scale(1/N,avgdir);
-	    if(tooclose > 0){
-		toocloseLoc = scale(1/(1.0*tooclose),toocloseLoc);
-	    }
-	    var fromtooclose = add(p,negate(toocloseLoc));
-	    var newDir = add(scale(cohefactor,toavg),scale(alignfactor,avgdir));
-	    newDir = add(newDir,scale(sepfactor,fromtooclose));
-	    newDir = normalize(newDir);
-	    b.direct(newDir);
-	};
-    }
-    var newLoc = b.loc.slice(0);
-    for(var i in b.loc){
-	if(Math.abs(b.loc[i])+2*b.size > limit[i]){
-	    newLoc[i] = -1*sign(newLoc[i])*(limit[i] - 2*b.size - 0.1);
-	}
+    if(b.timeSinceLastDirect <= b.decisionTime){
+	return false;
     };
-    b.translate(negate(b.loc));
-    b.translate(newLoc);
-    //b.update(du);
+    var inrange = [];
+    for(var i in butterflies){
+	if(i === butterflyIndex)
+	    continue;
+	var b2 = butterflies[i];
+	var los = add(p,negate(b2.loc));
+	var d = length(los);
+	var b2dir = normalize(los);
+	var dir = b.dir.slice(0);
+	dir.splice(3,1);
+	b2dir.splice(3,1);
+	dir.splice(0,1);
+	b2dir.splice(0,1);
+	var cos= dot(b2dir,dir);
+	//var sin = length(cross(b2dir,dir));
+	var angl1 = Math.abs(Math.acos(cos)*180/Math.PI);
+	var b2dir = normalize(los);
+	var dir = b.dir.slice(0);
+	dir.splice(3,1);
+	b2dir.splice(3,1);
+	dir.splice(1,1);
+	b2dir.splice(1,1);
+	var cos= dot(b2dir,dir);
+	var angl2 = Math.abs(Math.acos(cos)*180/Math.PI);
+	if (d < maxdist && angl1 < maxangl && angl2 < maxangl){
+	    inrange.push(i);
+	}
+
+    };
+    if(inrange.length > 0){
+	var avgloc = vec4(0,0,0,0);
+	var avgdir = vec4(0,0,0,0);
+	var toocloseLoc = vec4(0,0,0,1);
+	var tooclose = 0;
+	for(var i in inrange){
+	    var but = butterflies[inrange[i]];
+	    var los = add(p,negate(but.loc));
+	    var d = length(los);
+	    avgloc = add(avgloc,but.loc);
+	    avgdir = add(avgdir,but.dir);
+	    if(d < mindist){
+		toocloseLoc = add(toocloseLoc,but.loc);
+		tooclose += 1;
+	    };
+	};
+	var N = 1.0*inrange.length;
+	avgloc = scale(1/N,avgloc);
+	var toavg = add(avgloc,negate(p));
+	avgdir = scale(1/N,avgdir);
+	if(tooclose > 0){
+	    toocloseLoc = scale(1/(1.0*tooclose),toocloseLoc);
+	}
+	var fromtooclose = add(p,negate(toocloseLoc));
+	var newDir = add(scale(cohefactor,toavg),scale(alignfactor,avgdir));
+	newDir = add(newDir,scale(sepfactor,fromtooclose));
+	newDir = normalize(newDir);
+	return newDir;
+    };
+    return false;
 };
 
 var lastUpdate = 0;
@@ -250,7 +260,7 @@ function main(currTime){
     lastUpdate = thisUpdate;
 };
 
-
+var prevTrueTheta = [0,0,0];
 function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -258,6 +268,10 @@ function render()
     var rotM = mat4();
     var truetheta = add(theta,temptheta);
     rotM = mult(rotate(truetheta[1],[1,0,0,0]),rotM);
+    if(!equal(truetheta,prevTrueTheta)){
+	prevTrueTheta = truetheta;
+	console.log(flatten(rotM));
+    }
     rotM = mult(rotate(truetheta[0],[0,1,0,0]),rotM);
     //rotM = mult(rotate(truetheta[2],[0,0,1,0]),rotM);
     var neye = eye.slice(0);
@@ -267,6 +281,19 @@ function render()
     if(neye[0] === 0 && neye[1] !== 0 && neye[2] === 0){
 	neye[2] = 0.01;
     }
+    /*
+    if(!equal(truetheta,prevTrueTheta)){
+	prevTrueTheta = truetheta;
+	console.log("rotm");
+	console.log(flatten(rotM));
+	console.log("tt");
+	console.log(truetheta);
+	console.log("e");
+	console.log(eye);
+	console.log("ne");
+	console.log(neye);
+    };
+     */
     modelViewM = lookAt(neye,at,up);
     //Setjum sma perspective til ad gera thetta thaeginlegra
     projectionM = perspective(45,canvas.width/canvas.height,100.0,0.1);

@@ -5,8 +5,6 @@ function Cube(descr){
     }
     this.init();
     this.loc = [0.0,0.0,0.0,1.0];
-    this.normal = [0.0,1.0,0.0,0.0];
-    this.direction = [0.0,0.0,1.0,0.0];
     
     this.rotSpeed = 0;
     this.rotSpeeds = [];
