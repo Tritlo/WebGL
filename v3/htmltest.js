@@ -11,15 +11,32 @@ var mouseDown = false;
 var eye = vec3.create([0.0,0.0,2.0]);
 var at = vec3.create([0.0,0.0,0.0]);
 var up = vec3.create([0.0,1.0,0.0]);
+
+var lightPosition = vec4.create([1.0, 1.0, 1.0, 0.0] );
+var lightAmbient =  vec4.create([0.2, 0.2, 0.2, 1.0  ]);
+var lightDiffuse =  vec4.create([ 1.0, 1.0, 1.0, 1.0 ]);
+var lightSpecular = vec4.create([ 1.0, 1.0, 1.0, 1.0 ]);
+
+var materialAmbient =  vec4.create([ 1.0, 0.0, 1.0, 1.0 ]);
+var materialDiffuse =  vec4.create([ 1.0, 0.8, 0.0, 1.0 ]);
+var materialSpecular = vec4.create([ 1.0, 0.8, 0.0, 1.0 ]);
+var materialShininess = 1000.0;
+
+
+
+
+var ambientProduct,diffuseProduct,specularProduct;
 var modelViewM;
 var projectionM;
 var shouldQuit = false;
 var shouldUpdate = false;
 var shouldSingleStep = false;
 var mod;
-var cu;
 window.onload = function init() {
 
+    ambientProduct =  vec4.mult(lightAmbient, materialAmbient);
+    diffuseProduct =  vec4.mult(lightDiffuse, materialDiffuse);
+    specularProduct = vec4.mult(lightSpecular, materialSpecular);
     canvas = document.getElementById( "gl-canvas" );
     
     gl = WebGLUtils.setupWebGL( canvas );
@@ -39,20 +56,25 @@ window.onload = function init() {
     
     gl.useProgram( program );
     gl.cBuffer = gl.createBuffer();
-    gl.bindBuffer( gl.ARRAY_BUFFER, gl.cBuffer );
-
-    gl.vColor = gl.getAttribLocation( program, "vColor" );
-    gl.enableVertexAttribArray( gl.vColor );
-
+    gl.nBuffer = gl.createBuffer();
     gl.vBuffer = gl.createBuffer();
+
+    gl.vNormal = gl.getAttribLocation( program, "vNormal" );
+    gl.vTex = gl.getAttribLocation( program, "vTexCoord" );
     gl.vPosition = gl.getAttribLocation( program, "vPosition" );
-    gl.bindBuffer( gl.ARRAY_BUFFER, gl.vBuffer );
+    gl.vColor = gl.getAttribLocation( program, "vColor" );
+    console.log(gl.vNormal,gl.vColor,gl.vPosition,gl.vTex);
+    
+    
+    if(gl.vColor && gl.vColor > 0){
+	gl.enableVertexAttribArray( gl.vColor );
+    }
+    gl.enableVertexAttribArray( gl.vNormal );
     gl.enableVertexAttribArray( gl.vPosition );
 
     /*
     gl.tBuffer = gl.createBuffer();
-    gl.vTex = gl.getAttribLocation( program, "vTexCoord" );
-    gl.bindBuffer( gl.ARRAY_BUFFER, gl.tBuffer );
+    //gl.bindBuffer( gl.ARRAY_BUFFER, gl.tBuffer );
     gl.enableVertexAttribArray( gl.vTex );
     */
     
@@ -61,16 +83,26 @@ window.onload = function init() {
     gl.mVMLoc = gl.getUniformLocation(program, "modelViewMatrix");
     gl.pMLoc = gl.getUniformLocation(program, "projectionMatrix");
     gl.objMLoc = gl.getUniformLocation(program, "objectMatrix");
-    gl.thetaLoc = gl.getUniformLocation(program, "theta"); 
+    gl.thetaLoc = gl.getUniformLocation(program, "theta");
+
+    gl.uniform4fv( gl.getUniformLocation(program, 
+       "ambientProduct"),ambientProduct );
+    gl.uniform4fv( gl.getUniformLocation(program, 
+       "diffuseProduct"),diffuseProduct );
+    gl.uniform4fv( gl.getUniformLocation(program, 
+       "specularProduct"),specularProduct );	
+    gl.uniform4fv( gl.getUniformLocation(program, 
+       "lightPosition"),lightPosition);
+    
+    gl.uniform1f( gl.getUniformLocation(program, 
+       "shininess"),materialShininess );
+    
     var plyReader = PlyReader();
     plyReader.read("teapot.ply",onModelReady);
 };
 
 function onModelReady(mel){
     mod = mel;
-    cu = new Cube();
-    cu.renderVertices = false;
-    cu.renderLines = true;
     window.requestAnimFrame(main);
 };
 
@@ -131,7 +163,6 @@ function render()
     gl.uniformMatrix4fv(gl.pMLoc, false,projectionM);
 
     mod.render(gl);
-    cu.render(gl);
 }
 
 function handleKeyDown(evt){

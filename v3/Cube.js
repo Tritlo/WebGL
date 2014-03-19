@@ -168,21 +168,23 @@ Cube.prototype.render = function(gl){
 	this.updateVertices();
     }
     if(this.renderVertices){
+	if(gl.vColor && gl.vColor > 0){
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.cBuffer );
 	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.colors)), gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vColor, 4, gl.FLOAT, false, 0, 0 );
+	    }
 
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.vBuffer );
 	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.points)), gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vPosition, 4, gl.FLOAT, false, 0, 0 );
 
-	/*
+	if(gl.vTex && gl.vTex > 0){
 	gl.activeTexture(gl.TEXTURE0);
 	gl.bindTexture( gl.TEXTURE_2D, this.texture );
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.tBuffer );
 	gl.bufferData( gl.ARRAY_BUFFER, flatten(this.texCoordsArray), gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vTex, 2, gl.FLOAT, false, 0, 0 );
-	 */
+	    }
 	
 	gl.drawArrays( gl.TRIANGLES, 0, this.points.length);
     }
