@@ -5,7 +5,35 @@ function point3D(x, y, z)
     this.y = y;
     this.z = z;
 }
+function getNormal(p0,p1,p2){
+    var v1 = new point3D(p2.x - p1.x,
+			 p2.y - p1.y,
+			 p2.z - p1.z);
+    var v2 = new point3D(p0.x - p1.x,
+			 p0.y - p1.y,
+			 p0.z - p1.z);
+    var normal = new point3D(v1.y*v2.z-v2.y*v1.z,
+			     v1.z*v2.x-v2.z*v1.x,
+			     v1.x*v2.y-v2.x*v1.y);
+    var normalLen = Math.sqrt(normal.x*normal.x
+			      + normal.y*normal.y
+			      + normal.z*normal.z);
+    normal.x /= normalLen;
+    normal.y /= normalLen;
+    normal.z /= normalLen;
 
+    return normal;
+}
+
+function getPoints(indices,vertices){
+ var ps = [];
+ for(var i = 0; i < indices.length; i ++){
+	ps.push(new point3D(vertices[indices[i]*3+0],
+			    vertices[indices[i]*3+1],
+			    vertices[indices[i]*3+2]));
+ }
+ return ps;
+}
 
 var PlyReader =(function(){
     var parser = {
@@ -23,15 +51,11 @@ var PlyReader =(function(){
 	      retval = str.match(/element (\w+) (\d+)/);
 	      if(retval)
 	      {
-		if(retval[1] == "vertex")
-		    var npoints = parseInt(retval[2]);
-		if(retval[1] == "face")
-		    var npolys = parseInt(retval[2]);
+		if(retval[1] == "vertex") var npoints = parseInt(retval[2]);
+		if(retval[1] == "face") var npolys = parseInt(retval[2]);
 	      }
-	      if(str == "property float nx")
-		  hasNormal = true;
-	      if(str == "end_header")
-		  break;
+	      if(str == "property float nx") hasNormal = true;
+	      if(str == "end_header") break;
 	    }
 
 	    // Read points
@@ -66,8 +90,6 @@ var PlyReader =(function(){
 	    }
 	    // Polygons
 	    var pols = [];
-	    var polys = [];
-	    var index = 0;
 	    var newVertices = [];
 	    for (var i = 0; i < npolys; i++) 
 	    {
@@ -76,93 +98,40 @@ var PlyReader =(function(){
 		data = data.substr(data.indexOf("\n")+1);
 		retval = str.match(/(\d+)/g);
 		var nvertex = parseInt(retval[0]);
-		var aIndex = parseInt(retval[1]);
-		var bIndex = parseInt(retval[2]);
-		var cIndex = parseInt(retval[3]);
+		var indices = [];
+		for(var j = 0; j < nvertex; j++)
+		   indices.push(parseInt(retval[j+1]));
+		
 		// Polygon normal
-		var p0 = new point3D(vertices[aIndex*3+0],
-				     vertices[aIndex*3+1],
-				     vertices[aIndex*3+2]);
-		var p1 = new point3D(vertices[bIndex*3+0],
-				     vertices[bIndex*3+1],
-				     vertices[bIndex*3+2]);
-		var p2 = new point3D(vertices[cIndex*3+0],
-				     vertices[cIndex*3+1],
-				     vertices[cIndex*3+2]);
-		if(nvertex == 4){
-		    var dIndex = parseInt(retval[4]);
-		    var p3 = new point3D(vertices[cIndex*3+0],
-					 vertices[cIndex*3+1],
-					 vertices[cIndex*3+2]);
-		}
-
+		var ps = getPoints(indices,vertices);
 		if(!hasNormal)
 		{
-		    var v1 = new point3D(p2.x - p1.x,
-					 p2.y - p1.y,
-					 p2.z - p1.z);
-		    var v2 = new point3D(p0.x - p1.x,
-					 p0.y - p1.y,
-					 p0.z - p1.z);
-		    var normal = new point3D(v1.y*v2.z-v2.y*v1.z,
-					     v1.z*v2.x-v2.z*v1.x,
-					     v1.x*v2.y-v2.x*v1.y);
-		    var normalLen = Math.sqrt(normal.x*normal.x
-					      + normal.y*normal.y
-					      + normal.z*normal.z);
-		    normal.x /= normalLen;
-		    normal.y /= normalLen;
-		    normal.z /= normalLen;
+		   var normal = getNormal(ps[0],ps[1],ps[2]);
+		   var ns = [normal,normal,normal];
 		} else {
-		    var n0 = new point3D(vNorms[aIndex*3+0],
-					 vNorms[aIndex*3+1],
-					 vNorms[aIndex*3+2]);
-		    var n1 = new point3D(vNorms[bIndex*3+0],
-					 vNorms[bIndex*3+1],
-					 vNorms[bIndex*3+2]);
-		    var n2 = new point3D(vNorms[cIndex*3+0],
-					 vNorms[cIndex*3+1],
-					 vNorms[cIndex*3+2]);
-		    if(nvertex == 4){
-			var n3 = new point3D(vNorms[dIndex*3+0],
-					     vNorms[dIndex*3+1],
-					     vNorms[dIndex*3+2]);
-		    }
+		   var ns = getPoints(indices,vNorms);
 		}
 
-		var inda = index++; var indb = index++; var indc = index++;
-		polys.push(inda, indb, indc);
-		pols.push([inda,indb,indc]);
-		newVertices.push(p0.x, p0.y, p0.z);
-		newVertices.push(p1.x, p1.y, p1.z);
-		newVertices.push(p2.x, p2.y, p2.z);
-		if(!hasNormal)
-		{	
-		  vertexNormals.push(normal.x, normal.y, normal.z);
-		  vertexNormals.push(normal.x, normal.y, normal.z);
-		  vertexNormals.push(normal.x, normal.y, normal.z);
+		pols.push(indices);
+		for(var j = 0; j < 3; j++){
+		    newVertices.push(ps[j].x, ps[j].y, ps[j].z);
+		    vertexNormals.push(ns[j].x, ns[j].y, ns[j].z);
 		}
-		else{
-		  vertexNormals.push(n0.x, n0.y, n0.z);
-		  vertexNormals.push(n1.x, n1.y, n1.z);
-		  vertexNormals.push(n2.x, n2.y, n2.z);
-		}
+		
+		//If faces are declared as boxes,
+		//not triangles.
 		if (nvertex == 4){
-		    newVertices.push(p0.x, p0.y, p0.z);
-		    newVertices.push(p2.x, p2.y, p2.z);
-		    newVertices.push(p3.x, p3.y, p3.z);
+		    ps.splice(1,1);
 		    if(!hasNormal)
 		    {	
-		      vertexNormals.push(normal.x, normal.y, normal.z);
-		      vertexNormals.push(normal.x, normal.y, normal.z);
-		      vertexNormals.push(normal.x, normal.y, normal.z);
+			var normal = getNormal(ps[0],ps[1],ps[2]);
+			var ns = [normal,normal,normal,normal];
 		    }
-		    else{
-		      vertexNormals.push(n0.x, n0.y, n0.z);
-		      vertexNormals.push(n2.x, n2.y, n2.z);
-		      vertexNormals.push(n3.x, n3.y, n3.z);
+		    ns.splice(1,1);
+		    for(var j = 0; j < 3; j++){
+			newVertices.push(ps[j].x, ps[j].y, ps[j].z);
+			vertexNormals.push(ns[j].x, ns[j].y, ns[j].z);
 		    }
-		    
 		}
 	    }
 	    vertices = newVertices;
@@ -195,14 +164,14 @@ var PlyReader =(function(){
 					  0]));
 	    };
 	    // Create model
-	    var model = new Model({"points": points, "normals":normals});
-	    //var model = new Model({"points": points, "normals":normals, "pols":pols});
-	    if(callback){
+	    var model = new Model({
+		"points": points,
+		"normals":normals,
+		"polys": pols});
+	    
+	    if(callback)
 		callback(model);
-		return model;
-	    } else {
-		return model;
-	    }
+	    return model;
 	},
 	//works both in node.js and on web.
 	read: function(file,callback){

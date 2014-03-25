@@ -104,8 +104,8 @@ window.onload = function init() {
     gl.uniform1f( gl.getUniformLocation(program, 
        "shininess"),materialShininess );
     
-    plyReader.read("teapot.ply",onModelReady);
-    //plyReader.read("monkey.ply",onModelReady);
+    //plyReader.read("teapot.ply",onModelReady);
+    plyReader.read("monkey.ply",onModelReady);
     //plyReader.read("cube.ply",onModelReady);
     //plyReader.read("teapot-n.ply",onModelReady);
 };
