@@ -2,20 +2,24 @@
 precision highp float;
 #endif
 
-uniform vec4 ambientProduct;
-uniform vec4 diffuseProduct;
-uniform vec4 specularProduct;
+uniform vec4 ambientProduct, diffuseProduct, specularProduct;
 uniform float shininess;
 
 varying vec4 color;
-varying vec3 N,L,E;
+varying vec3 fN,fL,fE;
 varying  vec2 texCoord;
 uniform sampler2D texture;
 
 void main()
 {
-    vec4 fColor;
+    vec3 N = normalize(fN);
+    vec3 E = normalize(fE);
+    vec3 L = normalize(fL);
+  
+  
     vec3 H = normalize( L + E );
+    
+    vec4 fColor;
     vec4 ambient = ambientProduct;
 
     float Kd = max( dot(L, N), 0.0 );

@@ -89,6 +89,12 @@ var PlyReader =(function(){
 		var p2 = new point3D(vertices[cIndex*3+0],
 				     vertices[cIndex*3+1],
 				     vertices[cIndex*3+2]);
+		if(nvertex == 4){
+		    var dIndex = parseInt(retval[4]);
+		    var p3 = new point3D(vertices[cIndex*3+0],
+					 vertices[cIndex*3+1],
+					 vertices[cIndex*3+2]);
+		}
 
 		if(!hasNormal)
 		{
@@ -117,6 +123,11 @@ var PlyReader =(function(){
 		    var n2 = new point3D(vNorms[cIndex*3+0],
 					 vNorms[cIndex*3+1],
 					 vNorms[cIndex*3+2]);
+		    if(nvertex == 4){
+			var n3 = new point3D(vNorms[dIndex*3+0],
+					     vNorms[dIndex*3+1],
+					     vNorms[dIndex*3+2]);
+		    }
 		}
 
 		var inda = index++; var indb = index++; var indc = index++;
@@ -135,6 +146,23 @@ var PlyReader =(function(){
 		  vertexNormals.push(n0.x, n0.y, n0.z);
 		  vertexNormals.push(n1.x, n1.y, n1.z);
 		  vertexNormals.push(n2.x, n2.y, n2.z);
+		}
+		if (nvertex == 4){
+		    newVertices.push(p0.x, p0.y, p0.z);
+		    newVertices.push(p2.x, p2.y, p2.z);
+		    newVertices.push(p3.x, p3.y, p3.z);
+		    if(!hasNormal)
+		    {	
+		      vertexNormals.push(normal.x, normal.y, normal.z);
+		      vertexNormals.push(normal.x, normal.y, normal.z);
+		      vertexNormals.push(normal.x, normal.y, normal.z);
+		    }
+		    else{
+		      vertexNormals.push(n0.x, n0.y, n0.z);
+		      vertexNormals.push(n2.x, n2.y, n2.z);
+		      vertexNormals.push(n3.x, n3.y, n3.z);
+		    }
+		    
 		}
 	    }
 	    vertices = newVertices;
@@ -167,7 +195,8 @@ var PlyReader =(function(){
 					  0]));
 	    };
 	    // Create model
-	    var model = new Model({"points": points, "normals":normals, "pols":pols});
+	    var model = new Model({"points": points, "normals":normals});
+	    //var model = new Model({"points": points, "normals":normals, "pols":pols});
 	    if(callback){
 		callback(model);
 		return model;

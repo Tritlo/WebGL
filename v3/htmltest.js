@@ -1,6 +1,7 @@
 var canvas;
 var gl;
 
+
 var theta = [ 0, 0, 0 ];
 var temptheta = [ 0, 0, 0 ];
 var spin = [0,0,0];
@@ -26,7 +27,8 @@ var materialShininess = 100.0;
 
 
 
-var teapot,teapotn;
+var teapot = undefined;
+var teapotn = undefined;
 var ambientProduct,diffuseProduct,specularProduct;
 var modelViewM;
 var projectionM;
@@ -41,6 +43,8 @@ window.onload = function init() {
     diffuseProduct =  vec4.mult(lightDiffuse, materialDiffuse);
     specularProduct = vec4.mult(lightSpecular, materialSpecular);
     canvas = document.getElementById( "gl-canvas" );
+    canvas.width = window.innerWidth-20;
+    canvas.height = window.innerHeight-20;
     
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) { alert( "WebGL isn't available" ); }
@@ -55,7 +59,7 @@ window.onload = function init() {
     //
     //  Load shaders and initialize attribute buffers
     //
-    var program = loadShaders( gl, "vshader.glsl", "fshader.glsl" );
+    var program = loadShaders( gl, "vshader.glsl" , "fshader.glsl" );
     
     gl.useProgram( program );
     gl.cBuffer = gl.createBuffer();
@@ -100,13 +104,10 @@ window.onload = function init() {
     gl.uniform1f( gl.getUniformLocation(program, 
        "shininess"),materialShininess );
     
-    //plyReader.read("teapot.ply",onModelReady);
-    
-    plyReader.read("teapot-n.ply",function(x) {teapotn = x;});
-    plyReader.read("teapot.ply",function(x) {teapot = x;});
-    plyReader.read("teapot-n.ply",onModelReady);
+    plyReader.read("teapot.ply",onModelReady);
     //plyReader.read("monkey.ply",onModelReady);
     //plyReader.read("cube.ply",onModelReady);
+    //plyReader.read("teapot-n.ply",onModelReady);
 };
 
 function onModelReady(mel){
@@ -270,3 +271,9 @@ window.addEventListener("mouseup", handleMouseUp);
 window.addEventListener("mousedown", handleMouseDown);
 window.addEventListener("mousemove", handleMouseMove);
 window.addEventListener("wheel", handleMouseScroll);
+window.onresize = function(){
+    canvas.width = window.innerWidth-20;
+    canvas.height = window.innerHeight-20;
+    gl.viewport( 0, 0, canvas.width, canvas.height );
+    
+};

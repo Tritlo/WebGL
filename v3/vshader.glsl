@@ -9,19 +9,22 @@ uniform mat4 objectMatrix;
 uniform vec4 lightPosition;
 
 varying vec4 color;
-varying vec3 N,L,E;
+varying vec3 fN,fL,fE;
 varying vec2 texCoord;
 
 void main() 
 {
     //vec3 pos = -(modelViewMatrix * objectMatrix*vPosition).xyz;
-    vec3 pos = -( projectionMatrix*modelViewMatrix*objectMatrix*vPosition).xyz;
-    vec3 light = lightPosition.xyz;
-    L = normalize( light - pos );
-    E =  -pos;
-    color = vColor;
-    //N = normalize( (modelViewMatrix*objectMatrix*vNormal).xyz);
-    N = normalize( (vNormal).xyz);
+    //vec3 pos = -( projectionMatrix*modelViewMatrix*objectMatrix*vPosition).xyz;
+  
+    vec3 pos = (modelViewMatrix *objectMatrix*vPosition).xyz;
+
+    fN = normalize( modelViewMatrix*objectMatrix*vec4(vNormal)).xyz;
+    fE =  normalize(-pos);
+    fL = normalize( (modelViewMatrix*objectMatrix*lightPosition).xyz - pos);
+
+
     //texCoord = vTexCoord;
+    color = vColor;
     gl_Position = projectionMatrix*modelViewMatrix*objectMatrix*vPosition;
 } 
