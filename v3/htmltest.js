@@ -26,7 +26,7 @@ var materialShininess = 100.0;
 
 
 
-
+var teapot,teapotn;
 var ambientProduct,diffuseProduct,specularProduct;
 var modelViewM;
 var projectionM;
@@ -101,8 +101,9 @@ window.onload = function init() {
        "shininess"),materialShininess );
     
     //plyReader.read("teapot.ply",onModelReady);
-    plyReader.read("teapot-n.ply",console.log);
-    plyReader.read("teapot.ply",console.log);
+    
+    plyReader.read("teapot-n.ply",function(x) {teapotn = x;});
+    plyReader.read("teapot.ply",function(x) {teapot = x;});
     plyReader.read("teapot-n.ply",onModelReady);
     //plyReader.read("monkey.ply",onModelReady);
     //plyReader.read("cube.ply",onModelReady);

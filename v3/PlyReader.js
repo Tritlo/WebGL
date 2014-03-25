@@ -44,6 +44,7 @@ var parser = {
 	var maxPoint = new point3D(-Infinity, -Infinity, -Infinity);
 	var vertices = [];
 	var vertexNormals = [];
+	var vNorms = [];
 	for (var i = 0; i < npoints; i++) 
 	{
 	  retval = data.match(/([\d.-]+ ?)+/);
@@ -57,7 +58,7 @@ var parser = {
 	  vertices.push(point.x, point.y, point.z);
 
 	  if(hasNormal){
-	    vertexNormals.push(parseFloat(retval[3]),
+	    vNorms.push(parseFloat(retval[3]),
 			       parseFloat(retval[4]), parseFloat(retval[5]));
 	      }
 
@@ -87,8 +88,6 @@ var parser = {
 	  var bIndex = parseInt(retval[2]);
 	  var cIndex = parseInt(retval[3]);
 
-	  if(!hasNormal)
-	  {
 	    // Polygon normal
 	    var p0 = new point3D(vertices[aIndex*3+0],
 				 vertices[aIndex*3+1], vertices[aIndex*3+2]);
@@ -97,6 +96,8 @@ var parser = {
 	    var p2 = new point3D(vertices[cIndex*3+0],
 				 vertices[cIndex*3+1], vertices[cIndex*3+2]);
 
+	  if(!hasNormal)
+	  {
 	    var v1 = new point3D(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z);
 	    var v2 = new point3D(p0.x - p1.x, p0.y - p1.y, p0.z - p1.z);
 	    var normal = new point3D(v1.y*v2.z-v2.y*v1.z,
@@ -107,55 +108,45 @@ var parser = {
 	    normal.y /= normalLen;
 	    normal.z /= normalLen;
 	  }
+	    else {
+
+
+	    var n0 = new point3D(vNorms[aIndex*3+0],
+			 vNorms[aIndex*3+1], vNorms[aIndex*3+2]);
+	    var n1 = new point3D(vNorms[bIndex*3+0],
+			 vNorms[bIndex*3+1], vNorms[bIndex*3+2]);
+	    var n2 = new point3D(vNorms[cIndex*3+0],
+				 vNorms[cIndex*3+1], vNorms[cIndex*3+2]);
+}
 
 	  if(nvertex == 3 || nvertex == 4)
 	  {	
+	    var inda = index++; var indb = index++; var indc = index++;
+	    polys.push(inda, indb, indc);
+	    pols.push([inda,indb,indc]);
+	    newVertices.push(p0.x, p0.y, p0.z);
+	    newVertices.push(p1.x, p1.y, p1.z);
+	    newVertices.push(p2.x, p2.y, p2.z);
 	    if(!hasNormal)
 	    {	
-	      var inda = index++; var indb = index++; var indc = index++;
-	      polys.push(inda, indb, indc);
-	      pols.push([inda,indb,indc]);
-	      newVertices.push(p0.x, p0.y, p0.z);
-	      newVertices.push(p1.x, p1.y, p1.z);
-	      newVertices.push(p2.x, p2.y, p2.z);
-	      vertexNormals.push(normal.x, normal.y, normal.z);
-	      vertexNormals.push(normal.x, normal.y, normal.z);
-	      vertexNormals.push(normal.x, normal.y, normal.z);
-	    }
-	    else
-	      polys.push(aIndex, bIndex, cIndex);
-	  }
-	    /*
-	  if(nvertex == 4)
-	  {
-	    var dIndex = parseInt(retval[4]);
-	    var p3 = new point3D(vertices[dIndex*3+0],
-				 vertices[dIndex*3+1],
-				 vertices[dIndex*3+2]);
-
-	    if(!hasNormal)
-	    {
-	      var inda = index++; var indb = index++; var indc = index++;
-	      polys.push(inda, indb, indc);
-	      pols.push([inda,indb,indc]);
-	      newVertices.push(p0.x, p0.y, p0.z);
-	      newVertices.push(p2.x, p2.y, p2.z);
-	      newVertices.push(p3.x, p3.y, p3.z);
 	      vertexNormals.push(normal.x, normal.y, normal.z);
 	      vertexNormals.push(normal.x, normal.y, normal.z);
 	      vertexNormals.push(normal.x, normal.y, normal.z);
 	    }
 	    else{
-	      polys.push(aIndex, cIndex, dIndex);
-		pols.push([aIndex,cIndex,dIndex]);
-		}
+	      vertexNormals.push(n0.x, n0.y, n0.z);
+	      vertexNormals.push(n1.x, n1.y, n1.z);
+	      vertexNormals.push(n2.x, n2.y, n2.z);
+	    }
 	  }
-	     */
 	}
+	/*
 	if(!hasNormal)
 	{
 	  vertices = newVertices;
 	}
+	 */
+	  vertices = newVertices;
 
 
 	// Move to center of object
