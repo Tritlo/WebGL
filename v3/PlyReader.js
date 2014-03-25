@@ -125,10 +125,13 @@ var parser = {
 	    else
 	      polys.push(aIndex, bIndex, cIndex);
 	  }
+	    /*
 	  if(nvertex == 4)
 	  {
 	    var dIndex = parseInt(retval[4]);
-	    var p3 = new point3D(vertices[dIndex*3+0], vertices[dIndex*3+1], vertices[dIndex*3+2]);
+	    var p3 = new point3D(vertices[dIndex*3+0],
+				 vertices[dIndex*3+1],
+				 vertices[dIndex*3+2]);
 
 	    if(!hasNormal)
 	    {
@@ -147,6 +150,7 @@ var parser = {
 		pols.push([aIndex,cIndex,dIndex]);
 		}
 	  }
+	     */
 	}
 	if(!hasNormal)
 	{
@@ -173,7 +177,7 @@ var parser = {
 	    
 	  points.push(point4.create([vertices[i],vertices[i+1],vertices[i+2],1]));
 	  normals.push(point4.create([vertexNormals[i],vertexNormals[i+1],
-				     vertexNormals[i+2],1]));
+				     vertexNormals[i+2],0]));
 	};
 
 

@@ -13,15 +13,16 @@ var eye = vec3.create([0.0,0.0,4.0]);
 var at = vec3.create([0.0,0.0,0.0]);
 var up = vec3.create([0.0,1.0,0.0]);
 
-var lightPosition = vec4.create([1.0, 1.0, 2.0, 1.0] );
+var lightPosition = vec4.create([5.0, 5.0, 5.0, 1.0] );
 var lightAmbient =  vec4.create([0.2, 0.2, 0.2, 1.0  ]);
-var lightDiffuse =  vec4.create([ 0.5, 0.50, 0.50, 1.0 ]);
+var lightDiffuse =  vec4.create([ 1.0, 1.0, 1.0, 1.0 ]);
 var lightSpecular = vec4.create([ 1.0, 1.0, 1.0, 1.0 ]);
 
-var materialAmbient =  vec4.create([ 0.2, 0.28, 0.29, 1.0 ]); 
-var materialDiffuse =  vec4.create([ 0.4824, 0.5647, 0.5843, 1.0 ]);
+var materialAmbient =  vec4.create([ 0.2, 0.2, 0.2, 1.0 ]); 
+//var materialDiffuse =  vec4.create([ 0.4824, 0.5647, 0.5843, 1.0 ]);
+var materialDiffuse =  vec4.create([ 0.2, 0.2, 0.2, 1.0 ]);
 var materialSpecular = vec4.create([  1, 1, 1, 1.0 ]);
-var materialShininess = 10000.0;
+var materialShininess = 100.0;
 
 
 
@@ -100,7 +101,10 @@ window.onload = function init() {
        "shininess"),materialShininess );
     
     //plyReader.read("teapot.ply",onModelReady);
-    plyReader.read("monkey.ply",onModelReady);
+    plyReader.read("teapot-n.ply",console.log);
+    plyReader.read("teapot.ply",console.log);
+    plyReader.read("teapot-n.ply",onModelReady);
+    //plyReader.read("monkey.ply",onModelReady);
     //plyReader.read("cube.ply",onModelReady);
 };
 

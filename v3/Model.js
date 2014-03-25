@@ -17,27 +17,39 @@ Model.prototype.init = function (){
     }
 };
 
-Model.prototype.render = function(gl){
-    gl.uniformMatrix4fv(gl.objMLoc,false,this.objMatr);
+Model.prototype.render = function(gl,transformMatrix){
+    if(!transformMatrix){
+	var transformMatrix = mat4.identity(mat4.create());
+    };
+
+    gl.uniformMatrix4fv(
+	gl.objMLoc,
+	false,
+	mat4.multiply(transformMatrix,this.objMatr,mat4.create())
+    );
     if(gl.vColor && gl.vColor > 0){
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.cBuffer );
-	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.colors)), gl.STATIC_DRAW );
+	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.colors)),
+		       gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vColor, 4, gl.FLOAT, false, 0, 0 );
     }
 
     gl.bindBuffer( gl.ARRAY_BUFFER, gl.vBuffer );
-    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.points)), gl.STATIC_DRAW );
+    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.points)),
+		   gl.STATIC_DRAW );
     gl.vertexAttribPointer( gl.vPosition, 4, gl.FLOAT, false, 0, 0 );
 
     
     gl.bindBuffer( gl.ARRAY_BUFFER, gl.nBuffer );
-    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.normals)), gl.STATIC_DRAW );
+    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.normals)),
+		   gl.STATIC_DRAW );
     gl.vertexAttribPointer( gl.vNormal, 4, gl.FLOAT, false, 0, 0 );
 
     /*gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture( gl.TEXTURE_2D, this.texture );
     gl.bindBuffer( gl.ARRAY_BUFFER, gl.tBuffer );
-    gl.bufferData( gl.ARRAY_BUFFER, flatten(this.texCoordsArray), gl.STATIC_DRAW );
+    gl.bufferData( gl.ARRAY_BUFFER, flatten(this.texCoordsArray),
+     gl.STATIC_DRAW );
     gl.vertexAttribPointer( gl.vTex, 2, gl.FLOAT, false, 0, 0 );
      */
     gl.drawArrays( gl.TRIANGLES, 0, this.points.length);

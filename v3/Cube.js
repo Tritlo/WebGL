@@ -160,29 +160,35 @@ Cube.prototype.quad = function(a, b, c, d) {
 };
 
 
-Cube.prototype.render = function(gl){
+Cube.prototype.render = function(gl,transformMatrix){
+    if(!transformMatrix){
+	var transformMatrix = mat4.identity(mat4.create());
+    };
 
-    if(gl.objMLoc){
-	gl.uniformMatrix4fv(gl.objMLoc,false,this.objMatr);
-    } else {
-	this.updateVertices();
-    }
+    gl.uniformMatrix4fv(
+	gl.objMLoc,
+	false,
+	mat4.multiply(transformMatrix,this.objMatr,mat4.create())
+    );
     if(this.renderVertices){
 	if(gl.vColor && gl.vColor > 0){
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.cBuffer );
-	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.colors)), gl.STATIC_DRAW );
+	gl.bufferData( gl.ARRAY_BUFFER,
+		       new Float32Array(flatten(this.colors)), gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vColor, 4, gl.FLOAT, false, 0, 0 );
 	    }
 
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.vBuffer );
-	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(flatten(this.points)), gl.STATIC_DRAW );
+	gl.bufferData( gl.ARRAY_BUFFER,
+		       new Float32Array(flatten(this.points)), gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vPosition, 4, gl.FLOAT, false, 0, 0 );
 
 	if(gl.vTex && gl.vTex > 0){
 	gl.activeTexture(gl.TEXTURE0);
 	gl.bindTexture( gl.TEXTURE_2D, this.texture );
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.tBuffer );
-	gl.bufferData( gl.ARRAY_BUFFER, flatten(this.texCoordsArray), gl.STATIC_DRAW );
+	gl.bufferData( gl.ARRAY_BUFFER,
+		       flatten(this.texCoordsArray), gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vTex, 2, gl.FLOAT, false, 0, 0 );
 	    }
 	
@@ -190,11 +196,13 @@ Cube.prototype.render = function(gl){
     }
     if(this.renderLines){
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.cBuffer );
-	gl.bufferData( gl.ARRAY_BUFFER, flatten(this.lineColors), gl.STATIC_DRAW );
+	gl.bufferData( gl.ARRAY_BUFFER,
+		       flatten(this.lineColors), gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vColor, 4, gl.FLOAT, false, 0, 0 );
 
 	gl.bindBuffer( gl.ARRAY_BUFFER, gl.vBuffer );
-	gl.bufferData( gl.ARRAY_BUFFER, flatten(this.lineVertices), gl.STATIC_DRAW );
+	gl.bufferData( gl.ARRAY_BUFFER,
+		       flatten(this.lineVertices), gl.STATIC_DRAW );
 	gl.vertexAttribPointer( gl.vPosition, 4, gl.FLOAT, false, 0, 0 );
 	gl.drawArrays( gl.LINES, 0, this.lineVertices.length );
     }
