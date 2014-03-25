@@ -39,17 +39,17 @@
 // Flatten an array of vec's for GL buffers
       
 
-        function flatten(m) {
+function flatten(m) {
 
-            var result = new Float32Array(m[0].length*m.length);
-            var   i, j;
-            for (i = 0; i < m.length; i++) {
-             for(j = 0; j< m[0].length; j++) {
-                    result[m[0].length*i+j] = m[i][j];
-            }
-        }
-            return result;
+    var result = new Float32Array(m[0].length*m.length);
+    var   i, j;
+    for (i = 0; i < m.length; i++) {
+	for(j = 0; j< m[0].length; j++) {
+	    result[m[0].length*i+j] = m[i][j];
+	}
     }
+    return result;
+}
 
 // Fallback for systems that don't support WebGL
 if(typeof Float32Array != 'undefined') {
