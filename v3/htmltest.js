@@ -55,7 +55,7 @@ window.onload = function init() {
     //
     //  Load shaders and initialize attribute buffers
     //
-    var program = initShaders( gl, "vertex-shader", "fragment-shader" );
+    var program = loadShaders( gl, "vshader.glsl", "fshader.glsl" );
     
     gl.useProgram( program );
     gl.cBuffer = gl.createBuffer();
@@ -221,9 +221,8 @@ window.addEventListener("keydown", handleKeyDown);
 
 
 function handleMouse(evt,type) {
-
     if(type === "scroll"){
-	eye[2] -= sign(evt.wheelDelta);
+	eye[2] += sign(evt.deltaY);
     };
     var rect = canvas.getBoundingClientRect();
     var pos = [rect.left,rect.top];
@@ -270,4 +269,4 @@ function handleMouseUp(evt) {handleMouse(evt,"up");};
 window.addEventListener("mouseup", handleMouseUp);
 window.addEventListener("mousedown", handleMouseDown);
 window.addEventListener("mousemove", handleMouseMove);
-window.addEventListener("mousewheel", handleMouseScroll);
+window.addEventListener("wheel", handleMouseScroll);
