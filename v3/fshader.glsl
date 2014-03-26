@@ -33,5 +33,5 @@ void main()
     fColor = ambient + diffuse +specular;
     fColor.a = 1.0;
 		    
-    gl_FragColor = fColor;
+    gl_FragColor = fColor*color;
 }

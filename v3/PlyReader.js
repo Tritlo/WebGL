@@ -163,39 +163,28 @@ var PlyReader =(function(){
 					  vertexNormals[i+2],
 					  0]));
 	    };
-	    // Create model
-	    var model = new Model({
-		"points": points,
-		"normals":normals,
-		"polys": pols});
-	    
-	    if(callback)
+	    return {"points": points, "normals":normals, "polys": pols};
+	},
+	toModel: function(data,callback){
+	    var parsed = this.parse(data);
+	    var model = new Model(parsed);
+	    if(callback){
 		callback(model);
+	    }
 	    return model;
+	},
+	getData: function(file, callback){
+	    var parsed = this.parse(data);
+	    if(callback){
+		callback(parsed);
+	    }
+	    return parsed;
+
 	},
 	//works both in node.js and on web.
 	read: function(file,callback){
-	    var data;
-	    if(typeof window === 'undefined'){
-		var fs = require("fs");
-		data = fs.readFileSync(file)+'';
-		this.parse(data,callback);
-	    } else {
-		var request = new XMLHttpRequest();
-		var reader = this;
-		request.open('GET', file, true);
-		request.onload = function() {
-		  if (this.status >= 200 && this.status < 400){
-		      data = this.response;
-		      reader.parse(data,callback);
-
-		  }
-		};
-		request.onerror = function() {
-		    console.log("Request error for " + file );
-		};
-		request.send();
-	    }
+	    var data = loadFile(file);
+	    return this.toModel(data,callback);
 	}
     };
     Parser = function() {};

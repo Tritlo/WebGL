@@ -17,6 +17,7 @@ function radians( degrees ) {
     return degrees * Pi / 180.0;
 }
 
+
 /*
 N: modelViewM = AzElView(azim,elev,loc)
 F: azim er float á bilinu 0.0-360.0
