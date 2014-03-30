@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="Utils/webgl-utils.js"></script>
+<script type="text/javascript" src="Utils/LoadShaders.js"></script>
+<script type="text/javascript" src="Utils/glMatrixEAMPG.js"></script>
+<script type="text/javascript" src="Utils/glUtil.js"></script>
+<script type="text/javascript" src="Utils/util.js"></script>
+<script type="text/javascript" src="PlyReader.js"></script>
+<script type="text/javascript" src="Cache.js"></script>
+<script type="text/javascript" src="Model.js"></script>
+<script type="text/javascript" src="Cube.js"></script>
+<script type="text/javascript" src="Character.js"></script>
+<script type="text/javascript" src="Enemy.js"></script>
+<script type="text/javascript" src="Ball.js"></script>
+<script type="text/javascript" src="Sam.js"></script>
+<script type="text/javascript" src="Snake.js"></script>
+<script type="text/javascript" src="Tebert.js"></script>
+<script type="text/javascript" src="entityManager.js"></script>
+<script type="text/javascript" src="Pyramid.js"></script>
+<script type="text/javascript" src="game.js"></script>
+<script type="text/javascript" src="Keys.js"></script>
+<script type="text/javascript" src="Mouse.js"></script>
+<script type="text/javascript" src="Resize.js"></script>
+<style>
+  #gl-canvas {
+  border: 1px solid lime;
+  }
+  p {
+   font-family: terminus, monospace;
+   float:left;
+  }
+  .slid {
+  float: left;
+  }
+  
+</style>
+</head>
+<body style="background: black; color: lime">
+<div id="container" style="width: 512;">
+<canvas id="gl-canvas" width="600" height="350" style="" oncontextmenu="return false;">
+  <p> Your browser does not seem to support WebGL. This is how it should look like: </p>
+  <img src="tebert.png" alt="WebGL Render" />
+</canvas>
+</div>
+</body>
+</html>

@@ -21,10 +21,10 @@ void main()
 
     fN = normalize( modelViewMatrix*objectMatrix*vec4(vNormal)).xyz;
     fE =  normalize(-pos);
-    fL = normalize( (modelViewMatrix*objectMatrix*lightPosition).xyz - pos);
+    fL = normalize( (modelViewMatrix*lightPosition).xyz - pos);
 
 
-    //texCoord = vTexCoord;
+    texCoord = vTexCoord;
     color = vColor;
     gl_Position = projectionMatrix*modelViewMatrix*objectMatrix*vPosition;
 } 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Arch Linux) (format=pdflatex 2013.8.11)  3 MAR 2014 18:18
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Arch Linux) (format=pdflatex 2013.8.11)  30 MAR 2014 21:10
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -460,7 +460,7 @@ Package hyperref Info: Bookmarks ON on input line 4688.
 
 (/usr/share/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
-Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5041.
 \XeTeXLinkMargin=\dimen123
@@ -496,7 +496,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 \Hy@SectionHShift=\skip49
 )
 (/usr/share/texmf-dist/tex/latex/datatool/datatool.sty
-Package: datatool 2013/09/06 v2.18 (NLCT)
+Package: datatool 2014/02/03 v2.20 (NLCT)
 
 (/usr/share/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2012/10/14 v2.6b package option processing (HA)
@@ -641,26 +641,26 @@ Package: mdframed 2013/07/01 1.9b: mdframed
 (/usr/share/texmf-dist/tex/latex/l3kernel/expl3.sty
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3names.sty
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3bootstrap.sty
-Package: l3bootstrap 2013/07/28 v4581 L3 Experimental bootstrap code
+Package: l3bootstrap 2014/01/04 v4640 L3 Experimental bootstrap code
 )
-Package: l3names 2012/12/07 v4346 L3 Namespace for primitives
+Package: l3names 2014/01/04 v4640 L3 Namespace for primitives
 )
-Package: expl3 2013/07/28 v4582 L3 Experimental code bundle wrapper
+Package: expl3 2014/01/07 v4646 L3 Experimental code bundle wrapper
 
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3basics.sty
-Package: l3basics 2013/07/28 v4581 L3 Basic definitions
+Package: l3basics 2014/01/04 v4642 L3 Basic definitions
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3expan.sty
-Package: l3expan 2013/07/24 v4565 L3 Argument expansion
+Package: l3expan 2014/01/04 v4642 L3 Argument expansion
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3tl.sty
-Package: l3tl 2013/07/28 v4581 L3 Token lists
+Package: l3tl 2013/12/27 v4625 L3 Token lists
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3seq.sty
-Package: l3seq 2013/07/28 v4581 L3 Sequences and stacks
+Package: l3seq 2013/12/14 v4623 L3 Sequences and stacks
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3int.sty
-Package: l3int 2013/07/28 v4581 L3 Integers
+Package: l3int 2013/08/02 v4583 L3 Integers
 \c_max_int=\count149
 \l_tmpa_int=\count150
 \l_tmpb_int=\count151
@@ -668,26 +668,26 @@ Package: l3int 2013/07/28 v4581 L3 Integers
 \g_tmpb_int=\count153
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3quark.sty
-Package: l3quark 2013/07/21 v4564 L3 Quarks
+Package: l3quark 2013/12/14 v4623 L3 Quarks
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3prg.sty
-Package: l3prg 2013/07/28 v4581 L3 Control structures
+Package: l3prg 2014/01/04 v4642 L3 Control structures
 \g__prg_map_int=\count154
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3clist.sty
 Package: l3clist 2013/07/28 v4581 L3 Comma separated lists
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3token.sty
-Package: l3token 2013/07/28 v4581 L3 Experimental token manipulation
+Package: l3token 2013/08/25 v4587 L3 Experimental token manipulation
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3prop.sty
-Package: l3prop 2013/07/28 v4581 L3 Property lists
+Package: l3prop 2013/12/14 v4623 L3 Property lists
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3msg.sty
 Package: l3msg 2013/07/28 v4581 L3 Messages
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3file.sty
-Package: l3file 2013/07/28 v4581 L3 File and I/O operations
+Package: l3file 2013/10/13 v4596 L3 File and I/O operations
 \l_iow_line_count_int=\count155
 \l__iow_target_count_int=\count156
 \l__iow_current_line_int=\count157
@@ -716,12 +716,12 @@ Package: l3skip 2013/07/28 v4581 L3 Dimensions and skips
 \g_tmpb_muskip=\muskip17
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3keys.sty
-Package: l3keys 2013/07/28 v4581 L3 Experimental key-value interfaces
+Package: l3keys 2013/12/08 v4614 L3 Experimental key-value interfaces
 \g__keyval_level_int=\count160
 \l_keys_choice_int=\count161
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3fp.sty
-Package: l3fp 2013/07/09 v4521 L3 Floating points
+Package: l3fp 2014/01/04 v4642 L3 Floating points
 \c__fp_leading_shift_int=\count162
 \c__fp_middle_shift_int=\count163
 \c__fp_trailing_shift_int=\count164
@@ -741,7 +741,7 @@ Package: l3box 2013/07/28 v4581 L3 Experimental boxes
 \g_tmpb_box=\box34
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3coffins.sty
-Package: l3coffins 2012/09/09 v4212 L3 Coffin code layer
+Package: l3coffins 2013/12/14 v4624 L3 Coffin code layer
 \l__coffin_internal_box=\box35
 \l__coffin_internal_dim=\dimen132
 \l__coffin_offset_x_dim=\dimen133
@@ -771,7 +771,7 @@ Package: l3luatex 2013/07/28 v4581 L3 Experimental LuaTeX-specific functions
 \g__cctab_stack_int=\count172
 )
 (/usr/share/texmf-dist/tex/latex/l3kernel/l3candidates.sty
-Package: l3candidates 2013/07/24 v4576 L3 Experimental additions to l3kernel
+Package: l3candidates 2014/01/06 v4643 L3 Experimental additions to l3kernel
 \l__box_top_dim=\dimen142
 \l__box_bottom_dim=\dimen143
 \l__box_left_dim=\dimen144
@@ -789,7 +789,7 @@ Package: l3candidates 2013/07/24 v4576 L3 Experimental additions to l3kernel
 \l__coffin_scaled_total_height_dim=\dimen155
 \l__coffin_scaled_width_dim=\dimen156
 ))
-Package: xparse 2013/07/28 v4582 L3 Experimental document command parser
+Package: xparse 2013/12/31 v4634 L3 Experimental document command parser
 \l__xparse_current_arg_int=\count173
 \l__xparse_m_args_int=\count174
 \l__xparse_mandatory_args_int=\count175
@@ -1007,7 +1007,10 @@ Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 (/usr/share/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
 \pgfutil@everybye=\toks56
-)
+\pgfutil@tempdima=\dimen168
+\pgfutil@tempdimb=\dimen169
+
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex))
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
 \pgfutil@abb=\box52
 
@@ -1015,14 +1018,14 @@ Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 ))
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
-Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+Package: pgfrcs 2013/12/20 v3.0.0 (rcs-revision 1.28)
 ))
-Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+Package: pgf 2013/12/18 v3.0.0 (rcs-revision 1.14)
 
 (/usr/share/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
 (/usr/share/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
 (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
-Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+Package: pgfsys 2013/11/30 v3.0.0 (rcs-revision 1.47)
 
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
 \pgfkeys@pathtoks=\toks57
@@ -1031,34 +1034,37 @@ Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks59
 ))
-\pgf@x=\dimen168
-\pgf@y=\dimen169
-\pgf@xa=\dimen170
-\pgf@ya=\dimen171
-\pgf@xb=\dimen172
-\pgf@yb=\dimen173
-\pgf@xc=\dimen174
-\pgf@yc=\dimen175
+\pgf@x=\dimen170
+\pgf@y=\dimen171
+\pgf@xa=\dimen172
+\pgf@ya=\dimen173
+\pgf@xb=\dimen174
+\pgf@yb=\dimen175
+\pgf@xc=\dimen176
+\pgf@yc=\dimen177
 \w@pgf@writea=\write5
 \r@pgf@reada=\read2
 \c@pgf@counta=\count196
 \c@pgf@countb=\count197
 \c@pgf@countc=\count198
 \c@pgf@countd=\count199
+\t@pgf@toka=\toks60
+\t@pgf@tokb=\toks61
+\t@pgf@tokc=\toks62
 
 (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
 )
-Package pgfsys Info: Driver file for pgf: pgfsys-pdftex.def on input line 900.
+Driver file for pgf: pgfsys-pdftex.def
 
 (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
-File: pgfsys-pdftex.def 2009/05/22  (rcs-revision 1.26)
+File: pgfsys-pdftex.def 2013/07/18  (rcs-revision 1.33)
 
 (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
-File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
 )))
 (/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
-File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
 \pgfsyssoftpath@smallbuffer@items=\count200
 \pgfsyssoftpath@bigbuffer@items=\count201
 )
@@ -1084,19 +1090,19 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
-Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+Package: pgfcore 2010/04/11 v3.0.0 (rcs-revision 1.7)
 
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen176
+\pgfmath@dimen=\dimen178
 Normal \count register pool exhausted, switching to extended pool.
 \pgfmath@count=\count277
 \pgfmath@box=\box53
-\pgfmath@toks=\toks60
-\pgfmath@stack@operand=\toks61
-\pgfmath@stack@operation=\toks62
+\pgfmath@toks=\toks63
+\pgfmath@stack@operand=\toks64
+\pgfmath@stack@operation=\toks65
 )
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
@@ -1106,53 +1112,53 @@ Normal \count register pool exhausted, switching to extended pool.
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.te
 x) (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
 (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
-(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)))
-(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics
+.code.tex))) (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
 \c@pgfmathroundto@lastzeros=\count278
-))
-(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
-File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
-\pgf@picminx=\dimen177
-\pgf@picmaxx=\dimen178
-\pgf@picminy=\dimen179
-\pgf@picmaxy=\dimen180
-\pgf@pathminx=\dimen181
-\pgf@pathmaxx=\dimen182
-\pgf@pathminy=\dimen183
-\pgf@pathmaxy=\dimen184
-\pgf@xx=\dimen185
-\pgf@xy=\dimen186
-\pgf@yx=\dimen187
-\pgf@yy=\dimen188
-\pgf@zx=\dimen189
-\pgf@zy=\dimen190
+)) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen179
+\pgf@picmaxx=\dimen180
+\pgf@picminy=\dimen181
+\pgf@picmaxy=\dimen182
+\pgf@pathminx=\dimen183
+\pgf@pathmaxx=\dimen184
+\pgf@pathminy=\dimen185
+\pgf@pathmaxy=\dimen186
+\pgf@xx=\dimen187
+\pgf@xy=\dimen188
+\pgf@yx=\dimen189
+\pgf@yy=\dimen190
+\pgf@zx=\dimen191
+\pgf@zy=\dimen192
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
-File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
-\pgf@path@lastx=\dimen191
-\pgf@path@lasty=\dimen192
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen193
+\pgf@path@lasty=\dimen194
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
-File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
-\pgf@shorten@end@additional=\dimen193
-\pgf@shorten@start@additional=\dimen194
+File: pgfcorepathusage.code.tex 2013/12/13  (rcs-revision 1.23)
+\pgf@shorten@end@additional=\dimen195
+\pgf@shorten@start@additional=\dimen196
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
-File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+File: pgfcorescopes.code.tex 2013/10/09  (rcs-revision 1.44)
 \pgfpic=\box54
 \pgf@hbox=\box55
 \pgf@layerbox@main=\box56
 \pgf@picture@serial@count=\count279
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
-File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
-\pgflinewidth=\dimen195
+File: pgfcoregraphicstate.code.tex 2013/09/19  (rcs-revision 1.11)
+\pgflinewidth=\dimen197
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.t
 ex
-File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
-\pgf@pt@x=\dimen196
-\pgf@pt@y=\dimen197
-\pgf@pt@temp=\dimen198
+File: pgfcoretransformations.code.tex 2013/10/10  (rcs-revision 1.17)
+\pgf@pt@x=\dimen198
+\pgf@pt@y=\dimen199
+\pgf@pt@temp=\dimen200
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
 )
@@ -1161,79 +1167,86 @@ File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.te
 x
-File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
-File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+File: pgfcorearrows.code.tex 2013/11/07  (rcs-revision 1.40)
+\pgfarrowsep=\dimen201
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
-File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
-\pgf@max=\dimen199
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+Normal \dimen register pool exhausted, switching to extended pool.
+\pgf@max=\dimen256
 \pgf@sys@shading@range@num=\count280
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
-File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
 
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
-File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+File: pgfcoreexternal.code.tex 2013/07/15  (rcs-revision 1.20)
 \pgfexternal@startupbox=\box57
 ))
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
-File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
 )
 (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
-File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
 ) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
-File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
 )))
 (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
-File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+File: pgfmoduleshapes.code.tex 2013/10/31  (rcs-revision 1.34)
 \pgfnodeparttextbox=\box58
 )
 (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
-File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+File: pgfmoduleplot.code.tex 2013/07/31  (rcs-revision 1.12)
 )
 (/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
-Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen200
-\pgf@nodesepend=\dimen201
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.0 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen257
+\pgf@nodesepend=\dimen258
 )
 (/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
-Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.0 (rcs-revision 1.1)
 ))
 (/usr/share/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
 (/usr/share/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
 (/usr/share/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
-Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
-Normal \dimen register pool exhausted, switching to extended pool.
-\pgffor@iter=\dimen256
-\pgffor@skip=\dimen257
-\pgffor@stack=\toks63
-\pgffor@toks=\toks64
+Package: pgffor 2013/12/13 v3.0.0 (rcs-revision 1.25)
+
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen259
+\pgffor@skip=\dimen260
+\pgffor@stack=\toks66
+\pgffor@toks=\toks67
 ))
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
-Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
+Package: tikz 2013/12/13 v3.0.0 (rcs-revision 1.142)
 
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.te
 x
-File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.0 (rcs-revision 1.20)
 \pgf@plot@mark@count=\count281
-\pgfplotmarksize=\dimen258
+\pgfplotmarksize=\dimen261
 )
-\tikz@lastx=\dimen259
-\tikz@lasty=\dimen260
-\tikz@lastxsaved=\dimen261
-\tikz@lastysaved=\dimen262
-\tikzleveldistance=\dimen263
-\tikzsiblingdistance=\dimen264
+\tikz@lastx=\dimen262
+\tikz@lasty=\dimen263
+\tikz@lastxsaved=\dimen264
+\tikz@lastysaved=\dimen265
+\tikzleveldistance=\dimen266
+\tikzsiblingdistance=\dimen267
 \tikz@figbox=\box59
-\tikz@tempbox=\box60
+\tikz@figbox@bg=\box60
+\tikz@tempbox=\box61
+\tikz@tempbox@bg=\box62
 \tikztreelevel=\count282
 \tikznumberofchildren=\count283
 \tikznumberofcurrentchild=\count284
 \tikz@fig@count=\count285
  (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
-File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
 \pgfmatrixcurrentrow=\count286
 \pgfmatrixcurrentcolumn=\count287
 \pgf@matrix@numberofcolumns=\count288
@@ -1242,37 +1255,45 @@ File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
 
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 topaths.code.tex
-File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
-))) (/usr/share/texmf-dist/tex/latex/mh/mathtools.sty
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.0 (rcs-revision 1.2)
+))) (/usr/share/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\labelindent=\skip124
+\enit@outerparindent=\dimen268
+\enit@toks=\toks68
+\enit@inbox=\box63
+\enitdp@description=\count290
+)
+(/usr/share/texmf-dist/tex/latex/mh/mathtools.sty
 Package: mathtools 2013/02/12 v1.13 mathematical typesetting tools
 
 (/usr/share/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count290
-\calc@Bcount=\count291
-\calc@Adimen=\dimen265
-\calc@Bdimen=\dimen266
-\calc@Askip=\skip124
-\calc@Bskip=\skip125
+\calc@Acount=\count291
+\calc@Bcount=\count292
+\calc@Adimen=\dimen269
+\calc@Bdimen=\dimen270
+\calc@Askip=\skip125
+\calc@Bskip=\skip126
 LaTeX Info: Redefining \setlength on input line 76.
 LaTeX Info: Redefining \addtolength on input line 77.
-\calc@Ccount=\count292
-\calc@Cskip=\skip126
+\calc@Ccount=\count293
+\calc@Cskip=\skip127
 )
 (/usr/share/texmf-dist/tex/latex/mh/mhsetup.sty
 Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
 )
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count293
-\l_MT_multwidth_dim=\dimen267
-\origjot=\skip127
-\l_MT_shortvdotswithinadjustabove_dim=\dimen268
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen269
-\l_MT_above_intertext_sep=\dimen270
-\l_MT_below_intertext_sep=\dimen271
-\l_MT_above_shortintertext_sep=\dimen272
-\l_MT_below_shortintertext_sep=\dimen273
+\g_MT_multlinerow_int=\count294
+\l_MT_multwidth_dim=\dimen271
+\origjot=\skip128
+\l_MT_shortvdotswithinadjustabove_dim=\dimen272
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen273
+\l_MT_above_intertext_sep=\dimen274
+\l_MT_below_intertext_sep=\dimen275
+\l_MT_above_shortintertext_sep=\dimen276
+\l_MT_below_shortintertext_sep=\dimen277
 )
 (/usr/share/texmf-dist/tex/latex/minted/minted.sty
 Package: minted 2011/09/17 v1.7 Yet another Pygments shim for LaTeX
@@ -1282,11 +1303,11 @@ Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
 <2008/02/07> (tvz)
-\FV@CodeLineNo=\count294
+\FV@CodeLineNo=\count295
 \FV@InFile=\read3
-\FV@TabBox=\box61
-\c@FancyVerbLine=\count295
-\FV@StepNumber=\count296
+\FV@TabBox=\box64
+\c@FancyVerbLine=\count296
+\FV@StepNumber=\count297
 \FV@OutFile=\write6
 ) (/usr/share/texmf-dist/tex/latex/ifplatform/ifplatform.sty
 Package: ifplatform 2010/10/22 v0.4 Testing for the operating system
@@ -1300,10 +1321,10 @@ runsystem(uname -s > "v2.w18")...executed.
 runsystem(rm -- "v2.w18")...executed.
 
 )
-\minted@bgbox=\box62
+\minted@bgbox=\box65
 \minted@code=\write7
-\@float@every@listing=\toks65
-\c@listing=\count297
+\@float@every@listing=\toks69
+\c@listing=\count298
 )
 runsystem(which pygmentize && touch v2.aex)...executed.
 
@@ -1314,21 +1335,21 @@ runsystem(rm v2.aex)...executed.
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count298
-\c@ALG@rem=\count299
-\c@ALG@nested=\count300
-\ALG@tlm=\skip128
-\ALG@thistlm=\skip129
-\c@ALG@Lnr=\count301
-\c@ALG@blocknr=\count302
-\c@ALG@storecount=\count303
-\c@ALG@tmpcounter=\count304
-\ALG@tmplength=\skip130
+\c@ALG@line=\count299
+\c@ALG@rem=\count300
+\c@ALG@nested=\count301
+\ALG@tlm=\skip129
+\ALG@thistlm=\skip130
+\c@ALG@Lnr=\count302
+\c@ALG@blocknr=\count303
+\c@ALG@storecount=\count304
+\c@ALG@tmpcounter=\count305
+\ALG@tmplength=\skip131
 ) (/usr/share/texmf-dist/tex/latex/qtree/qtree.sty
 Package: 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
 Package: qtree 2008/12/12 v.3.1bQtree: tree-drawing for linguistics
 (/usr/share/texmf-dist/tex/latex/pict2e/pict2e.sty
-Package: pict2e 2011/04/05 v0.2y Improved picture commands (HjG,RN,JT)
+Package: pict2e 2014/01/12 v0.2z Improved picture commands (HjG,RN,JT)
 
 (/usr/share/texmf-dist/tex/latex/pict2e/pict2e.cfg
 File: pict2e.cfg 2011/04/05 v0.1t pict2e configuration for teTeX/TeXLive
@@ -1339,133 +1360,136 @@ Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 121.
 (/usr/share/texmf-dist/tex/latex/pict2e/p2e-pdftex.def
 File: p2e-pdftex.def 2011/04/05 v0.1t Driver-dependant file (RN,HjG,JT)
 )
-\pIIe@GRAPH=\toks66
-\@arclen=\dimen274
-\@arcrad=\dimen275
-\@tempdimd=\dimen276
+\pIIe@GRAPH=\toks70
+\@arclen=\dimen278
+\@arcrad=\dimen279
+\@tempdimd=\dimen280
 )
-\c@treecount=\count305
-\c@branchcount=\count306
-\parentbox=\box63
-\treebox=\box64
-\treeboxone=\box65
-\treeboxtwo=\box66
-\treeboxthree=\box67
-\treeboxfour=\box68
-\treeboxfive=\box69
-\treeboxsix=\box70
-\treeboxseven=\box71
-\treeboxeight=\box72
-\treeboxnine=\box73
-\treeboxten=\box74
-\treeboxeleven=\box75
-\treeboxtwelve=\box76
-\treeboxthirteen=\box77
-\treeboxfourteen=\box78
-\treeboxfifteen=\box79
-\treeboxsixteen=\box80
-\treeboxseventeen=\box81
-\treeboxeighteen=\box82
-\treeboxnineteen=\box83
-\treeboxtwenty=\box84
-\treeoffsetone=\skip131
-\treeoffsettwo=\skip132
-\treeoffsetthree=\skip133
-\treeoffsetfour=\skip134
-\treeoffsetfive=\skip135
-\treeoffsetsix=\skip136
-\treeoffsetseven=\skip137
-\treeoffseteight=\skip138
-\treeoffsetnine=\skip139
-\treeoffsetten=\skip140
-\treeoffseteleven=\skip141
-\treeoffsettwelve=\skip142
-\treeoffsetthirteen=\skip143
-\treeoffsetfourteen=\skip144
-\treeoffsetfifteen=\skip145
-\treeoffsetsixteen=\skip146
-\treeoffsetseventeen=\skip147
-\treeoffseteighteen=\skip148
-\treeoffsetnineteen=\skip149
-\treeoffsettwenty=\skip150
-\treeshiftone=\skip151
-\treeshifttwo=\skip152
-\treeshiftthree=\skip153
-\treeshiftfour=\skip154
-\treeshiftfive=\skip155
-\treeshiftsix=\skip156
-\treeshiftseven=\skip157
-\treeshifteight=\skip158
-\treeshiftnine=\skip159
-\treeshiftten=\skip160
-\treeshifteleven=\skip161
-\treeshifttwelve=\skip162
-\treeshiftthirteen=\skip163
-\treeshiftfourteen=\skip164
-\treeshiftfifteen=\skip165
-\treeshiftsixteen=\skip166
-\treeshiftseventeen=\skip167
-\treeshifteighteen=\skip168
-\treeshiftnineteen=\skip169
-\treeshifttwenty=\skip170
-\treewidthone=\skip171
-\treewidthtwo=\skip172
-\treewidththree=\skip173
-\treewidthfour=\skip174
-\treewidthfive=\skip175
-\treewidthsix=\skip176
-\treewidthseven=\skip177
-\treewidtheight=\skip178
-\treewidthnine=\skip179
-\treewidthten=\skip180
-\treewidtheleven=\skip181
-\treewidthtwelve=\skip182
-\treewidththirteen=\skip183
-\treewidthfourteen=\skip184
-\treewidthfifteen=\skip185
-\treewidthsixteen=\skip186
-\treewidthseventeen=\skip187
-\treewidtheighteen=\skip188
-\treewidthnineteen=\skip189
-\treewidthtwenty=\skip190
-\daughteroffsetone=\skip191
-\daughteroffsettwo=\skip192
-\daughteroffsetthree=\skip193
-\daughteroffsetfour=\skip194
-\branchwidthone=\skip195
-\branchwidthtwo=\skip196
-\branchwidththree=\skip197
-\branchwidthfour=\skip198
-\parentoffset=\skip199
-\treeoffset=\skip200
-\daughteroffset=\skip201
+\c@treecount=\count306
+\c@branchcount=\count307
+\parentbox=\box66
+\treebox=\box67
+\treeboxone=\box68
+\treeboxtwo=\box69
+\treeboxthree=\box70
+\treeboxfour=\box71
+\treeboxfive=\box72
+\treeboxsix=\box73
+\treeboxseven=\box74
+\treeboxeight=\box75
+\treeboxnine=\box76
+\treeboxten=\box77
+\treeboxeleven=\box78
+\treeboxtwelve=\box79
+\treeboxthirteen=\box80
+\treeboxfourteen=\box81
+\treeboxfifteen=\box82
+\treeboxsixteen=\box83
+\treeboxseventeen=\box84
+\treeboxeighteen=\box85
+\treeboxnineteen=\box86
+\treeboxtwenty=\box87
+\treeoffsetone=\skip132
+\treeoffsettwo=\skip133
+\treeoffsetthree=\skip134
+\treeoffsetfour=\skip135
+\treeoffsetfive=\skip136
+\treeoffsetsix=\skip137
+\treeoffsetseven=\skip138
+\treeoffseteight=\skip139
+\treeoffsetnine=\skip140
+\treeoffsetten=\skip141
+\treeoffseteleven=\skip142
+\treeoffsettwelve=\skip143
+\treeoffsetthirteen=\skip144
+\treeoffsetfourteen=\skip145
+\treeoffsetfifteen=\skip146
+\treeoffsetsixteen=\skip147
+\treeoffsetseventeen=\skip148
+\treeoffseteighteen=\skip149
+\treeoffsetnineteen=\skip150
+\treeoffsettwenty=\skip151
+\treeshiftone=\skip152
+\treeshifttwo=\skip153
+\treeshiftthree=\skip154
+\treeshiftfour=\skip155
+\treeshiftfive=\skip156
+\treeshiftsix=\skip157
+\treeshiftseven=\skip158
+\treeshifteight=\skip159
+\treeshiftnine=\skip160
+\treeshiftten=\skip161
+\treeshifteleven=\skip162
+\treeshifttwelve=\skip163
+\treeshiftthirteen=\skip164
+\treeshiftfourteen=\skip165
+\treeshiftfifteen=\skip166
+\treeshiftsixteen=\skip167
+\treeshiftseventeen=\skip168
+\treeshifteighteen=\skip169
+\treeshiftnineteen=\skip170
+\treeshifttwenty=\skip171
+\treewidthone=\skip172
+\treewidthtwo=\skip173
+\treewidththree=\skip174
+\treewidthfour=\skip175
+\treewidthfive=\skip176
+\treewidthsix=\skip177
+\treewidthseven=\skip178
+\treewidtheight=\skip179
+\treewidthnine=\skip180
+\treewidthten=\skip181
+\treewidtheleven=\skip182
+\treewidthtwelve=\skip183
+\treewidththirteen=\skip184
+\treewidthfourteen=\skip185
+\treewidthfifteen=\skip186
+\treewidthsixteen=\skip187
+\treewidthseventeen=\skip188
+\treewidtheighteen=\skip189
+\treewidthnineteen=\skip190
+\treewidthtwenty=\skip191
+\daughteroffsetone=\skip192
+\daughteroffsettwo=\skip193
+\daughteroffsetthree=\skip194
+\daughteroffsetfour=\skip195
+\branchwidthone=\skip196
+\branchwidthtwo=\skip197
+\branchwidththree=\skip198
+\branchwidthfour=\skip199
+\parentoffset=\skip200
+\treeoffset=\skip201
 Normal \skip register pool exhausted, switching to extended pool.
-\branchwidth=\skip256
-\parentwidth=\skip257
-\treewidth=\skip258
-\qta=\toks67
-\qtb=\toks68
-\nbranches=\count307
-\qroofx=\count308
-\qroofy=\count309
-\@qrscratchbox=\box85
+\daughteroffset=\skip256
+\branchwidth=\skip257
+\parentwidth=\skip258
+\treewidth=\skip259
+\qta=\toks71
+\qtb=\toks72
+\nbranches=\count308
+\qroofx=\count309
+\qroofy=\count310
+\@qrscratchbox=\box88
 )
 (/usr/share/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2013/05/16 v3.9f The Babel package
+Package: babel 2013/12/03 3.9h The Babel package
 
+(/usr/share/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2013/12/03 3.9h Babel switching mechanism
+)
 (/usr/share/texmf-dist/tex/generic/babel-icelandic/icelandic.ldf
 Language: icelandic 2005/03/30 v1.1g Icelandic support from the babel system
 
 (/usr/share/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2013/05/16 v3.9f Babel common definitions
-\babel@savecnt=\count310
-\U@D=\dimen277
+File: babel.def 2013/12/03 3.9h Babel common definitions
+\babel@savecnt=\count311
+\U@D=\dimen281
 )
 Package babel Info: Making " an active character on input line 70.
-\pl@left=\dimen278
-\pl@down=\dimen279
-\pl@right=\dimen280
-\pl@temp=\dimen281
+\pl@left=\dimen282
+\pl@down=\dimen283
+\pl@right=\dimen284
+\pl@temp=\dimen285
 ))) (./v2.aux)
 \openout1 = `v2.aux'.
 
@@ -1486,17 +1510,17 @@ LaTeX Font Info:    ... okay on input line 10.
 
 (/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count311
-\scratchdimen=\dimen282
-\scratchbox=\box86
-\nofMPsegments=\count312
-\nofMParguments=\count313
-\everyMPshowfont=\toks69
-\MPscratchCnt=\count314
-\MPscratchDim=\dimen283
-\MPnumerator=\count315
-\makeMPintoPDFobject=\count316
-\everyMPtoPDFconversion=\toks70
+\scratchcounter=\count312
+\scratchdimen=\dimen286
+\scratchbox=\box89
+\nofMPsegments=\count313
+\nofMParguments=\count314
+\everyMPshowfont=\toks73
+\MPscratchCnt=\count315
+\MPscratchDim=\dimen287
+\MPnumerator=\count316
+\makeMPintoPDFobject=\count317
+\everyMPtoPDFconversion=\toks74
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1532,7 +1556,7 @@ LaTeX Font Info:    ... okay on input line 10.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box87
+\AtBeginShipoutBox=\box90
 Package hyperref Info: Link coloring OFF on input line 10.
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1540,7 +1564,7 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count317
+\c@section@level=\count318
 )
 LaTeX Info: Redefining \ref on input line 10.
 LaTeX Info: Redefining \pageref on input line 10.
@@ -1550,7 +1574,7 @@ LaTeX Info: Redefining \nameref on input line 10.
 \@outlinefile=\write8
 \openout8 = `v2.out'.
 
-\c@lstlisting=\count318
+\c@lstlisting=\count319
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
  ABD: EveryShipout initializing macros
@@ -1571,49 +1595,52 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 13.
 
 (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-) [1
+)
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] <butterfly.png, id=17, 528
-.97626pt x 722.7pt>
-File: butterfly.png Graphic file (type png)
+LaTeX Warning: File `tebert.png' not found on input line 19.
 
-<use butterfly.png>
-Package pdftex.def Info: butterfly.png used on input line 43.
-(pdftex.def)             Requested size: 256.0748pt x 349.85844pt.
- <butterfly2.png, id=18, 518.93875pt x 518.93875pt>
-File: butterfly2.png Graphic file (type png)
 
-<use butterfly2.png>
-Package pdftex.def Info: butterfly2.png used on input line 49.
-(pdftex.def)             Requested size: 341.43306pt x 341.4475pt.
- [2 <./butterfly.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 54.
- [3 <./butterfly2.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 54.
+! Package pdftex.def Error: File `tebert.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.19   \includegraphics{tebert.png}
+                                   
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 25.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 25.
  (./v2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 54.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 54.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 25.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 25.
 Package rerunfilecheck Info: File `v2.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 54.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 25.
  ) 
 Here is how much of TeX's memory you used:
- 28225 strings out of 493315
- 478149 string characters out of 6143704
- 618091 words of memory out of 5000000
- 31113 multiletter control sequences out of 15000+600000
+ 30116 strings out of 493315
+ 537562 string characters out of 6143704
+ 660172 words of memory out of 5000000
+ 32988 multiletter control sequences out of 15000+600000
  13501 words of font info for 47 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 58i,6n,92p,976b,368s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,6n,92p,10494b,368s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/t
 exmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts
 /type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dist/fonts/type1/public/c
 m-super/sfrm2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt120
 0.pfb>
-Output written on v2.pdf (3 pages, 114705 bytes).
+Output written on v2.pdf (1 page, 65228 bytes).
 PDF statistics:
- 46 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 37 PDF objects out of 1000 (max. 8388607)
+ 29 compressed objects within 1 object stream
+ 3 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
